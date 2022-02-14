@@ -24,10 +24,10 @@
 
 #define MAX_FILE_PATH_SIZE 256
 
-static gboolean auto_save = FALSE;
-static guint auto_save_timer = 10000;
-static gboolean auto_save_same_dir = TRUE;
-static guint auto_save_immediate_changes = 150;
+static gboolean autosave = FALSE;
+static guint autosave_timer = 10000;
+static gboolean autosave_same_dir = TRUE;
+static guint autosave_immediate_changes = 150;
 /**
  * The path (relative to "$HOME") to the directory
  * where autosave files are stored.
@@ -43,7 +43,7 @@ typedef struct {
 	gchar filename[256];
 } AutoSaveData;
 
-static AutoSaveData auto_save_data = { 0, 0, "" };
+static AutoSaveData autosave_data = { 0, 0, "" };
 
 static void AutoSaveData_init(AutoSaveData *data)
 {
@@ -54,47 +54,47 @@ static void AutoSaveData_init(AutoSaveData *data)
 
 gboolean autosave_get_state(void)
 {
-	return auto_save;
+	return autosave;
 }
 
 void autosave_set_state(gboolean state)
 {
-	auto_save = state;
+	autosave = state;
 }
 
 guint autosave_get_timer(void)
 {
-	return auto_save_timer;
+	return autosave_timer;
 }
 
 void autosave_set_timer(guint milliseconds)
 {
-	auto_save_timer = milliseconds;
+	autosave_timer = milliseconds;
 }
 
 gboolean autosave_get_same_dir(void)
 {
-	return auto_save_same_dir;
+	return autosave_same_dir;
 }
 
 void autosave_set_same_dir(gboolean state)
 {
-	auto_save_same_dir = state;
+	autosave_same_dir = state;
 }
 
 guint autosave_get_immediate_changes(void)
 {
-	return auto_save_immediate_changes;
+	return autosave_immediate_changes;
 }
 
 void autosave_set_immediate_changes(guint num_changes)
 {
-	auto_save_immediate_changes = num_changes;
+	autosave_immediate_changes = num_changes;
 }
 
 static void autosave_reset_num_changes(void)
 {
-	auto_save_data.changes = 0;
+	autosave_data.changes = 0;
 }
 
 /** @see https://stackoverflow.com/questions/11871245/knuth-multiplicative-hash */
@@ -104,7 +104,7 @@ static inline uint32_t hash(const uint32_t value)
 }
 
 /**
- * Generates a new auto-save filename, and stores it in auto_save_data.filename.
+ * Generates a new auto-save filename, and stores it in autosave_data.filename.
  */
 static gboolean autosave_generate_filename(GtkTextBuffer *buffer) {
 
@@ -117,27 +117,27 @@ static gboolean autosave_generate_filename(GtkTextBuffer *buffer) {
 	//   but as the addresses are very likley to be different in the lower 32bits,
 	//   there should generally be no problem.
 	const uint32_t pointer_hash = hash((uint32_t) buffer);
-	//auto_save_data.filename[MAX_FILE_PATH_SIZE];
+	//autosave_data.filename[MAX_FILE_PATH_SIZE];
 	if (pub->fi->filename == NULL) {
 		// We are editing a text buffer without having chosen a filename yet
 		char *home;
 		home = getenv("HOME");
-		sprintf(auto_save_data.filename, "%s/%s/%u.txt", home, AUTOSAVE_DIR_PATH, pointer_hash);
+		sprintf(autosave_data.filename, "%s/%s/%u.txt", home, AUTOSAVE_DIR_PATH, pointer_hash);
 	} else {
 		// Known/chosen filename
 		gchar real_filename_base_buf[MAX_FILE_PATH_SIZE];
 		strcpy(real_filename_base_buf, pub->fi->filename);
 		char* real_filename_base = basename(real_filename_base_buf);
-		if (auto_save_same_dir) {
+		if (autosave_same_dir) {
 			gchar real_filename_dir_buf[MAX_FILE_PATH_SIZE];
 			strcpy(real_filename_dir_buf, pub->fi->filename);
 			char* real_filename_dir = dirname(real_filename_dir_buf);
-			sprintf(auto_save_data.filename, "%s/.%u_%s", real_filename_dir, pointer_hash, real_filename_base);
+			sprintf(autosave_data.filename, "%s/.%u_%s", real_filename_dir, pointer_hash, real_filename_base);
 			uses_cache_dir = FALSE;
 		} else {
 			char *home;
 			home = getenv("HOME");
-			sprintf(auto_save_data.filename, "%s/%s/.%u_%s", home, AUTOSAVE_DIR_PATH, pointer_hash, real_filename_base);
+			sprintf(autosave_data.filename, "%s/%s/.%u_%s", home, AUTOSAVE_DIR_PATH, pointer_hash, real_filename_base);
 		}
 	}
 	return uses_cache_dir;
@@ -161,7 +161,7 @@ static void autosave_delete_file(gchar *filename)
 static void autosave_ensure_parent_exists() {
 
 	gchar parent_buf[MAX_FILE_PATH_SIZE];
-	strcpy(parent_buf, auto_save_data.filename);
+	strcpy(parent_buf, autosave_data.filename);
 	const gchar* parent = dirname(parent_buf);
 	const gint res = g_mkdir_with_parents(parent, 0700);
 	if (res != 0) {
@@ -175,7 +175,7 @@ static void autosave_try_save(GtkWidget *view) {
 	if (gtk_text_buffer_get_modified(buffer)) {
 		// store old/current auto-save filename
 		gchar old_filename[MAX_FILE_PATH_SIZE];
-		strcpy(old_filename, auto_save_data.filename);
+		strcpy(old_filename, autosave_data.filename);
 
 		const gboolean uses_cache_dir = autosave_generate_filename(buffer);
 		if (uses_cache_dir) {
@@ -183,13 +183,13 @@ static void autosave_try_save(GtkWidget *view) {
 		}
 
 		// perform the auto-save
-		FileInfo auto_save_file_info = { auto_save_data.filename, pub->fi->charset, pub->fi->charset_flag, pub->fi->lineend };
-		/*const gint save_err = */file_save_real(view, &auto_save_file_info);
+		FileInfo autosave_file_info = { autosave_data.filename, pub->fi->charset, pub->fi->charset_flag, pub->fi->lineend };
+		/*const gint save_err = */file_save_real(view, &autosave_file_info);
 		gtk_text_buffer_set_modified(buffer, TRUE);
 		autosave_reset_num_changes();
-		//g_print("l3afpad: auto-saved to file: '%s'\n", auto_save_data.filename);
+		//g_print("l3afpad: auto-saved to file: '%s'\n", autosave_data.filename);
 
-		if (strcmp(old_filename, auto_save_data.filename) != 0) {
+		if (strcmp(old_filename, autosave_data.filename) != 0) {
 			autosave_delete_file(old_filename);
 		}
 	}
@@ -198,7 +198,7 @@ static void autosave_try_save(GtkWidget *view) {
 static gboolean idle_handler(GtkWidget *view) {
 
 	// mark this timer as done
-	auto_save_data.timer_id = 0;
+	autosave_data.timer_id = 0;
 
 	autosave_try_save(view);
 
@@ -216,32 +216,32 @@ static gboolean time_handler(GtkWidget *view) {
 
 void autosave_cb_buffer_changed(GtkTextBuffer *buffer, GtkWidget *view)
 {
-	auto_save_data.changes++;
-	if (auto_save) {
-		if (auto_save_data.timer_id > 0) {
-			g_source_remove(auto_save_data.timer_id);
-			auto_save_data.timer_id = 0;
+	autosave_data.changes++;
+	if (autosave) {
+		if (autosave_data.timer_id > 0) {
+			g_source_remove(autosave_data.timer_id);
+			autosave_data.timer_id = 0;
 		}
-		if (auto_save_data.changes >= auto_save_immediate_changes) {
+		if (autosave_data.changes >= autosave_immediate_changes) {
 			autosave_try_save(view);
 		} else {
-			auto_save_data.timer_id = g_timeout_add(auto_save_timer, (GSourceFunc) time_handler, view);
+			autosave_data.timer_id = g_timeout_add(autosave_timer, (GSourceFunc) time_handler, view);
 		}
 	}
 }
 
 static void autosave_kill_timer()
 {
-	if (auto_save_data.timer_id > 0) {
-		g_source_remove(auto_save_data.timer_id);
-		auto_save_data.timer_id = 0;
+	if (autosave_data.timer_id > 0) {
+		g_source_remove(autosave_data.timer_id);
+		autosave_data.timer_id = 0;
 	}
 }
 
 void autosave_cb_file_saved(gchar *filename)
 {
 	autosave_kill_timer();
-	if (strcmp(filename, auto_save_data.filename) != 0) {
+	if (strcmp(filename, autosave_data.filename) != 0) {
 		// not saving to our temporary/auto-save file
 		autosave_discard_temp_file();
 	}
@@ -250,7 +250,7 @@ void autosave_cb_file_saved(gchar *filename)
 void autosave_discard_temp_file()
 {
 	autosave_kill_timer();
-	autosave_delete_file(auto_save_data.filename);
-	AutoSaveData_init(&auto_save_data);
+	autosave_delete_file(autosave_data.filename);
+	AutoSaveData_init(&autosave_data);
 }
 
