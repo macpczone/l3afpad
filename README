@@ -31,6 +31,7 @@ Installation
 L3afpad requires:
 * GTK+-3.x.x libraries
 * ncurses library
+* uchardet library (libuchardet-dev)
 
 and for building also:
 * automake
