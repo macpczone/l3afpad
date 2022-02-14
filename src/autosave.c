@@ -28,6 +28,11 @@ static gboolean auto_save = FALSE;
 static guint auto_save_timer = 10000;
 static gboolean auto_save_same_dir = TRUE;
 static guint auto_save_immediate_changes = 150;
+/**
+ * The path (relative to "$HOME") to the directory
+ * where autosave files are stored.
+ */
+static gchar* AUTOSAVE_DIR_PATH = ".cache/l3afpad/buffers";
 
 typedef struct {
 	/** GTK handler/signal ID of the auto-save timer or 0 if none. */
@@ -116,7 +121,7 @@ static void autosave_generate_filename(GtkTextBuffer *buffer) {
 		// We are editing a text buffer without having chosen a filename yet
 		char *home;
 		home = getenv("HOME");
-		sprintf(auto_save_data.filename, "%s/.cache/l3afpad/buffers/%u.txt", home, pointer_hash);
+		sprintf(auto_save_data.filename, "%s/%s/%u.txt", home, AUTOSAVE_DIR_PATH, pointer_hash);
 	} else {
 		// Known/chosen filename
 		gchar real_filename_base_buf[MAX_FILE_PATH_SIZE];
@@ -130,7 +135,7 @@ static void autosave_generate_filename(GtkTextBuffer *buffer) {
 		} else {
 			char *home;
 			home = getenv("HOME");
-			sprintf(auto_save_data.filename, "%s/.cache/l3afpad/buffers/.%u_%s", home, pointer_hash, real_filename_base);
+			sprintf(auto_save_data.filename, "%s/%s/.%u_%s", home, AUTOSAVE_DIR_PATH, pointer_hash, real_filename_base);
 		}
 	}
 }
