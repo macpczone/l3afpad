@@ -106,8 +106,9 @@ static inline uint32_t hash(const uint32_t value)
 /**
  * Generates a new auto-save filename, and stores it in auto_save_data.filename.
  */
-static void autosave_generate_filename(GtkTextBuffer *buffer) {
+static gboolean autosave_generate_filename(GtkTextBuffer *buffer) {
 
+	gboolean uses_cache_dir = TRUE;
 	// Create a hash from our buffers pointer value,
 	// in order to circumvent the case of multiple opened files
 	// with the same name overwriting each others buffer.
@@ -132,12 +133,14 @@ static void autosave_generate_filename(GtkTextBuffer *buffer) {
 			strcpy(real_filename_dir_buf, pub->fi->filename);
 			char* real_filename_dir = dirname(real_filename_dir_buf);
 			sprintf(auto_save_data.filename, "%s/.%u_%s", real_filename_dir, pointer_hash, real_filename_base);
+			uses_cache_dir = FALSE;
 		} else {
 			char *home;
 			home = getenv("HOME");
 			sprintf(auto_save_data.filename, "%s/%s/.%u_%s", home, AUTOSAVE_DIR_PATH, pointer_hash, real_filename_base);
 		}
 	}
+	return uses_cache_dir;
 }
 
 static void autosave_delete_file(gchar *filename)
@@ -152,6 +155,20 @@ static void autosave_delete_file(gchar *filename)
 	}
 }
 
+/**
+ * Ensure the parent directory of the autosave file exists.
+ */
+static void autosave_ensure_parent_exists() {
+
+	gchar parent_buf[MAX_FILE_PATH_SIZE];
+	strcpy(parent_buf, auto_save_data.filename);
+	const gchar* parent = dirname(parent_buf);
+	const gint res = g_mkdir_with_parents(parent, 0700);
+	if (res != 0) {
+		perror("Error: Failed to create auto-save dir");
+	}
+}
+
 static void autosave_try_save(GtkWidget *view) {
 
 	GtkTextBuffer *buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
@@ -160,7 +177,10 @@ static void autosave_try_save(GtkWidget *view) {
 		gchar old_filename[MAX_FILE_PATH_SIZE];
 		strcpy(old_filename, auto_save_data.filename);
 
-		autosave_generate_filename(buffer);
+		const gboolean uses_cache_dir = autosave_generate_filename(buffer);
+		if (uses_cache_dir) {
+			autosave_ensure_parent_exists();
+		}
 
 		// perform the auto-save
 		FileInfo auto_save_file_info = { auto_save_data.filename, pub->fi->charset, pub->fi->charset_flag, pub->fi->lineend };
