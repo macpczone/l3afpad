@@ -311,8 +311,6 @@ gint run_dialog_search(GtkWidget *textview, gint mode)
 			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 			GTK_STOCK_FIND_AND_REPLACE, GTK_RESPONSE_OK,
 			NULL);
-		gtk_container_set_border_width (GTK_CONTAINER(dialog), 4);
-		gtk_widget_set_size_request(dialog, 400, -1);
 	} else {
 		dialog = gtk_dialog_new_with_buttons(_("Find"),
 			GTK_WINDOW(gtk_widget_get_toplevel(textview)),
@@ -320,9 +318,9 @@ gint run_dialog_search(GtkWidget *textview, gint mode)
 			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 			GTK_STOCK_FIND, GTK_RESPONSE_OK,
 			NULL);
-		gtk_container_set_border_width (GTK_CONTAINER(dialog), 4);
-		gtk_widget_set_size_request(dialog, 400, -1);
 	}
+	gtk_container_set_border_width (GTK_CONTAINER(dialog), 4);
+	gtk_widget_set_size_request(dialog, 400, -1);
 
 	table = gtk_table_new(mode + 2, 2, FALSE);
 	 gtk_table_set_row_spacings(GTK_TABLE(table), 8);
