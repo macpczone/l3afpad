@@ -16,6 +16,28 @@ This program is released under the GNU General Public License (GPL) version 2,
 see the file 'COPYING' for more information.
 
 
+Auto-save
+=========
+
+This branch contains extra auto-save functionality.
+
+If activated ("Options" -> "Auto Save"),
+it saves the current buffers content 10 seconds after the last change happened,
+or after 150 character changes have been applied to the buffer.
+
+Unnamed buffers are stored to
+"~/.cache/l3afpad/buffers/<some-number>.txt"
+
+Named buffers are stored to either
+"~/.cache/l3afpad/buffers/<some-number>_<filename>"
+or
+"<filedir>/.<some-number>_<filename>"
+depending on the state of "Options" -> "Auto Save Same Dir".
+
+Once a file was manually saved,
+the auto-save file is deleted.
+
+
 Features
 ========
 
