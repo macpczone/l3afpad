@@ -295,7 +295,7 @@ void on_option_word_wrap(void)
 	state = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/WordWrap")));
 	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(pub->mw->view),
-		state ? GTK_WRAP_WORD : GTK_WRAP_NONE);
+		state ? GTK_WRAP_WORD_CHAR : GTK_WRAP_NONE);
 }
 
 void on_option_line_numbers(void)
