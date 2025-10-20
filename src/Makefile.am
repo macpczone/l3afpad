@@ -1,7 +1,5 @@
 bin_PROGRAMS = l3afpad
 
-AM_CPPFLAGS = -DICONDIR=\"$(datadir)/pixmaps\"
-
 l3afpad_SOURCES = \
 	l3afpad.h main.c \
 	window.h window.c \
