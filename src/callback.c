@@ -333,7 +333,7 @@ void on_help_about(void)
 		"Wen-Yen Chuang <caleb@calno.com>",
 		"Yoo, Taik-Yon <jaagar@gmail.com>",
 		"Steven Honeyman <stevenhoneyman@gmail.com>",
-                "Nube <nubesu@tuta.io>,
+                "Nube <nubesu@tuta.io>",
 		NULL
 	};
 	const gchar *translator_credits = _("translator-credits");
