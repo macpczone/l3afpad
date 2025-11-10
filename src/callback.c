@@ -326,13 +326,14 @@ void on_option_auto_indent(void)
 
 void on_help_about(void)
 {
-	const gchar *copyright = "Copyright \xc2\xa9 2004-2010 Tarot Osuji\nCopyright \xc2\xa9 2011 Wen-Yen Chuang\nCopyright \xc2\xa9 2011 Jack Gandy\nCopyright \xc2\xa9 2012 Yoo, Taik-Yon\nCopyright \xc2\xa9 2014 Steven Honeyman";
+	const gchar *copyright = "Copyright \xc2\xa9 2004-2010 Tarot Osuji\nCopyright \xc2\xa9 2011 Wen-Yen Chuang\nCopyright \xc2\xa9 2011 Jack Gandy\nCopyright \xc2\xa9 2012 Yoo, Taik-Yon\nCopyright \xc2\xa9 2014 Steven Honeyman\nCopyright \xc2\xa9 2025 Nube";
 	const gchar *comments = _("GTK+ based simple text editor");
 	const gchar *authors[] = {
-		"Tarot Osuji <tarot@sdf.lonestar.org>",
+		"Tarot Osuji <tarot@sdf.org>",
 		"Wen-Yen Chuang <caleb@calno.com>",
 		"Yoo, Taik-Yon <jaagar@gmail.com>",
 		"Steven Honeyman <stevenhoneyman@gmail.com>",
+                "Nube <nubesu@tuta.io>,
 		NULL
 	};
 	const gchar *translator_credits = _("translator-credits");
