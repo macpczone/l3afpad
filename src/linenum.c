@@ -32,7 +32,7 @@ static gint calculate_min_number_window_width(GtkWidget *widget)
 {
 	PangoLayout *layout;
 	gchar *str;
-	gint width, col = 4;
+	gint width, col = 2;
 
 	str = g_strnfill(col, 0x20);
 	layout = gtk_widget_create_pango_layout(widget, str);
@@ -114,7 +114,7 @@ line_numbers_foreground_attr_new(GtkWidget *widget)
 	GdkRGBA          rgb;
 
 	context = gtk_widget_get_style_context(widget);
-	gtk_style_context_get_color(context, GTK_STATE_FLAG_NORMAL, &rgb);
+	gtk_style_context_get_color(context, GTK_STATE_FLAG_INSENSITIVE, &rgb);
 
 	return pango_attr_foreground_new((guint16)(rgb.red   * 65535),
 									 (guint16)(rgb.green * 65535),
@@ -161,10 +161,6 @@ line_numbers_expose (GtkWidget *widget, cairo_t *event)
 	y1 = (gint)clips->rectangles[0].y;
 
 	cairo_rectangle_list_destroy(clips);
-
-	/* skip drawing if not in the line number area. */
-	if (i >= gtk_text_view_get_border_window_size(text_view, GTK_TEXT_WINDOW_LEFT))
-		return FALSE;
 
 	gtk_text_view_window_to_buffer_coords (text_view,
 	                                       GTK_TEXT_WINDOW_LEFT,
