@@ -9,3 +9,4 @@ MimeType=text/plain;
 Categories=GTK;Utility;TextEditor;
 Keywords=text;editor;leafpad;notepad;
 InitialPreference=6;
+StartupNotify=true

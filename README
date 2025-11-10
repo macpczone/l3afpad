@@ -9,6 +9,9 @@ focuses on keeping weight down to a minimum, only the most essential features
 are implemented in the editor. L3afpad is simple to use, is easily compiled,
 requires few libraries, and starts up quickly.
 
+L3afpad differs from it's ancestor [leafpad](http://tarot.freeshell.org/leafpad/),
+in that it uses GTK3 (while leafpad uses GTK2).
+
 This program is released under the GNU General Public License (GPL) version 2,
 see the file 'COPYING' for more information.
 
@@ -28,12 +31,19 @@ Features
 Installation
 ============
 
-L3afpad requires GTK+-3.x.x libraries.
+L3afpad requires:
+* GTK+-3.x.x libraries
+* ncurses library
+
+and for building also:
+* automake
+* intltool
 
 Simple install procedure:
 
   $ tar xzvf l3afpad-x.x.x.tar.gz       # unpack the sources
   $ cd l3afpad-x.x.x                    # change to the toplevel directory
+  $ ./autogen.sh                        # generate the `configure' script
   $ ./configure                         # run the `configure' script
   $ make                                # build L3afpad
   [ Become root if necessary ]
