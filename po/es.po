@@ -1,23 +1,20 @@
 # Spanish/Spain translation of l3afpad
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the l3afpad package.
-# Lucas Vieites <lucas@codexion.com>,2004-2009.
+# Lucas Vieites <lucas.vieites@gmail.com>,2004-2022.
+# Nube <nubesu@tuta.io>, 2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: l3afpad-0.8.16\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-05 17:27+0200\n"
-"PO-Revision-Date: 2009-06-24 21:49+0200\n"
-"Last-Translator: Lucas Vieites <lucas@codexion.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2025-11-09 22:13-0400\n"
+"Last-Translator: Nube <nubesu@tuta.io>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../src/menu.c:34
 msgid "_File"
@@ -105,11 +102,11 @@ msgstr "_Buscar"
 
 #: ../src/menu.c:59
 msgid "Find _Next"
-msgstr "Buscar el _siguiente"
+msgstr "/Buscar/Buscar _siguiente"
 
 #: ../src/menu.c:60
 msgid "Find _Previous"
-msgstr "Buscar el an_terior"
+msgstr "/Buscar/Buscar an_terior"
 
 #: ../src/menu.c:61
 msgid "_Replace..."
@@ -117,11 +114,11 @@ msgstr "_Reemplazar"
 
 #: ../src/menu.c:62
 msgid "_Jump To..."
-msgstr "Ira a la _línea"
+msgstr "Ir a _línea"
 
 #: ../src/menu.c:63
 msgid "_Font..."
-msgstr "Tipogra_fía..."
+msgstr "_Fuente..."
 
 #: ../src/menu.c:64
 msgid "_About"
@@ -162,7 +159,7 @@ msgstr "¿Desea guardar los cambios a «%s»?"
 
 #: ../src/font.c:36
 msgid "Font"
-msgstr "Tipografía"
+msgstr "Fuente"
 
 #: ../src/selector.c:95
 #, c-format
