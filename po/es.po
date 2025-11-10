@@ -102,11 +102,11 @@ msgstr "_Buscar"
 
 #: ../src/menu.c:59
 msgid "Find _Next"
-msgstr "/Buscar/Buscar _siguiente"
+msgstr "Buscar _siguiente"
 
 #: ../src/menu.c:60
 msgid "Find _Previous"
-msgstr "/Buscar/Buscar an_terior"
+msgstr "Buscar an_terior"
 
 #: ../src/menu.c:61
 msgid "_Replace..."
@@ -155,7 +155,7 @@ msgstr "Lɜafpad"
 #: ../src/view.c:65
 #, c-format
 msgid "Save changes to '%s'?"
-msgstr "¿Desea guardar los cambios a «%s»?"
+msgstr "¿Quieres guardar los cambios a «%s»?"
 
 #: ../src/font.c:36
 msgid "Font"
@@ -216,7 +216,7 @@ msgstr "Codificación de c_aracteres:"
 #: ../src/selector.c:369
 #, c-format
 msgid "'%s' already exists. Overwrite?"
-msgstr "«%s» ya existe. ¿Desea sobrescribirlo?"
+msgstr "«%s» ya existe. ¿Quieres sobrescribirlo?"
 
 #: ../src/file.c:49
 msgid "Untitled"
@@ -256,7 +256,7 @@ msgstr "No se ha encontrado la cadena buscada"
 
 #: ../src/search.c:182
 msgid "Replace?"
-msgstr "¿Desea reemplazar?"
+msgstr "¿Quieres reemplazar?"
 
 #: ../src/search.c:245
 #, c-format
