@@ -146,7 +146,7 @@ msgstr "Editor de texto simple"
 
 #: ../src/callback.c:338
 msgid "translator-credits"
-msgstr "Lucas Vieites <lucas@asixinformatica.com>"
+msgstr "Nube <nubesu@tuta.io>"
 
 #: ../src/callback.c:349
 msgid "Lɜafpad"
