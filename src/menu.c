@@ -1,21 +1,8 @@
 /*
- *  L3afpad - GTK+ based simple text editor
- *  Copyright (C) 2004-2005 Tarot Osuji
- *  Copyright (C)      2011 Wen-Yen Chuang <caleb AT calno DOT com>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * L3afpad - GTK+ based simple text editor
+ * Copyright (C) 2004-2005 Tarot Osuji
+ * Copyright (C)      2011 Wen-Yen Chuang <caleb AT calno DOT com>
+ * Copyright (C)      2025 Nube <nubesu AT tuta DOT io>
  */
 
 #include "l3afpad.h"
@@ -38,6 +25,7 @@ static GtkActionEntry menu_items[] =
 	{ "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 	{ "New", GTK_STOCK_NEW, N_("_New"), "<control>N", NULL, G_CALLBACK(on_file_new) },
 	{ "Open", GTK_STOCK_OPEN, N_("_Open..."), "<control>O", NULL, G_CALLBACK(on_file_open) },
+	{ "RecentFiles", NULL, N_("Recent _Files"), NULL, NULL, NULL },
 	{ "Save", GTK_STOCK_SAVE, N_("_Save"), "<control>S", NULL, G_CALLBACK(on_file_save) },
 	{ "SaveAs", GTK_STOCK_SAVE_AS, N_("Save _As..."), "<shift><control>S", NULL, G_CALLBACK(on_file_save_as) },
 #if ENABLE_STATISTICS
@@ -80,6 +68,7 @@ static const gchar *ui_info =
 "    <menu action='File'>"
 "      <menuitem action='New'/>"
 "      <menuitem action='Open'/>"
+"      <menu action='RecentFiles'/>"
 "      <menuitem action='Save'/>"
 "      <menuitem action='SaveAs'/>"
 "      <separator/>"
@@ -132,7 +121,7 @@ static gchar *menu_translate(const gchar *path, gpointer data)
 
 void menu_sensitivity_from_modified_flag(gboolean is_text_modified)
 {
-	gtk_widget_set_sensitive(menu_item_save,   is_text_modified);
+	gtk_widget_set_sensitive(menu_item_save, is_text_modified);
 }
 
 void menu_sensitivity_from_selection_bound(gboolean is_bound_exist)
@@ -142,10 +131,8 @@ void menu_sensitivity_from_selection_bound(gboolean is_bound_exist)
 	gtk_widget_set_sensitive(menu_item_delete, is_bound_exist);
 }
 
-//void menu_sensitivity_from_clipboard(gboolean is_clipboard_exist)
 void menu_sensitivity_from_clipboard(void)
 {
-//g_print("clip board checked.\n");
 	gtk_widget_set_sensitive(menu_item_paste,
 		gtk_clipboard_wait_is_text_available(
 			gtk_clipboard_get(GDK_SELECTION_CLIPBOARD)));
@@ -154,20 +141,6 @@ void menu_sensitivity_from_clipboard(void)
 GtkUIManager *create_menu_bar(GtkWidget *window)
 {
 	GtkUIManager *ifactory;
-#if 0
-	gboolean flag_emacs = FALSE;
-
-	gchar *key_theme = NULL;
-	GtkSettings *settings = gtk_settings_get_default();
-	if (settings) {
-		g_object_get(settings, "gtk-key-theme-name", &key_theme, NULL);
-		if (key_theme) {
-			if (!g_ascii_strcasecmp(key_theme, "Emacs"))
-				flag_emacs = TRUE;
-			g_free(key_theme);
-		}
-	}
-#endif
 
 	ifactory = gtk_ui_manager_new();
 	GtkActionGroup *actions = gtk_action_group_new("Actions");
@@ -179,13 +152,16 @@ GtkUIManager *create_menu_bar(GtkWidget *window)
 	gtk_ui_manager_add_ui_from_string(ifactory, ui_info, -1, NULL);
 	gtk_window_add_accel_group(GTK_WINDOW(window), accel_group);
 
-	/* hidden keybinds */
 	gtk_accel_group_connect(
 		accel_group, GDK_W, GDK_CONTROL_MASK, 0,
 		g_cclosure_new_swap(G_CALLBACK(on_file_close), NULL, NULL));
 	gtk_accel_group_connect(
 		accel_group, GDK_T, GDK_CONTROL_MASK, 0,
 		g_cclosure_new_swap(G_CALLBACK(on_option_always_on_top), NULL, NULL));
+	gtk_accel_group_connect(
+		accel_group, GDK_M, GDK_CONTROL_MASK, 0,
+		g_cclosure_new_swap(G_CALLBACK(on_option_toggle_menubar), NULL, NULL));
+
 	gtk_widget_add_accelerator(
 		gtk_ui_manager_get_widget(ifactory, "/M/Edit/Redo"),
 		"activate", accel_group, GDK_Y, GDK_CONTROL_MASK, 0);
@@ -199,7 +175,6 @@ GtkUIManager *create_menu_bar(GtkWidget *window)
 		gtk_ui_manager_get_widget(ifactory, "/M/Search/Replace"),
 		"activate", accel_group, GDK_R, GDK_CONTROL_MASK, 0);
 
-	/* initialize sensitivities */
 	gtk_widget_set_sensitive(
 		gtk_ui_manager_get_widget(ifactory, "/M/Search/FindNext"),
 		FALSE);
@@ -213,6 +188,30 @@ GtkUIManager *create_menu_bar(GtkWidget *window)
 	menu_item_paste  = gtk_ui_manager_get_widget(ifactory, "/M/Edit/Paste");
 	menu_item_delete = gtk_ui_manager_get_widget(ifactory, "/M/Edit/Delete");
 	menu_sensitivity_from_selection_bound(FALSE);
+
+	GtkWidget *recent_item = gtk_ui_manager_get_widget(ifactory, "/M/File/RecentFiles");
+	if (recent_item) {
+		GtkWidget *recent_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(recent_item), recent_menu);
+
+		GList *recent_list = recent_get_list();
+		gint i = 1;
+
+		for (GList *l = recent_list; l && i <= MAX_RECENT_FILES; l = l->next, i++) {
+			gchar *basename = g_path_get_basename((gchar *)l->data);
+			gchar *label = g_strdup_printf("%d. %s", i, basename);
+			GtkWidget *item = gtk_menu_item_new_with_label(label);
+			
+			g_signal_connect(G_OBJECT(item), "activate",
+				G_CALLBACK(on_file_open_recent), l->data);
+			
+			gtk_menu_shell_append(GTK_MENU_SHELL(recent_menu), item);
+			gtk_widget_show(item);
+			
+			g_free(label);
+			g_free(basename);
+		}
+	}
 
 	return ifactory;
 }

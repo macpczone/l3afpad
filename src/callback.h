@@ -1,20 +1,20 @@
 /*
- *  L3afpad - GTK+ based simple text editor
- *  Copyright (C) 2004-2005 Tarot Osuji
+ * L3afpad - GTK+ based simple text editor
+ * Copyright (C) 2004-2005 Tarot Osuji
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 #ifndef _CALLBACK_H
@@ -46,6 +46,8 @@ void on_option_word_wrap(void);
 void on_option_line_numbers(void);
 void on_option_always_on_top(void);
 void on_option_auto_indent(void);
+void on_option_toggle_menubar(void);
+void on_file_open_recent(gpointer data);
 void on_help_about(void);
 
 #endif /* _CALLBACK_H */
