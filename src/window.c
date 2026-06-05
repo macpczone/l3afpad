@@ -34,7 +34,6 @@ MainWin *create_main_window(void)
 	mw->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_name(mw->window, PACKAGE_NAME);
 
-	gtk_window_set_icon_from_file(GTK_WINDOW(mw->window), ICONDIR"/l3afpad.png", NULL);
 	gtk_window_set_default_icon_name(PACKAGE);
 
 	g_signal_connect(G_OBJECT(mw->window), "delete-event",
