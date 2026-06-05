@@ -66,6 +66,7 @@
 #include "dnd.h"
 #include "utils.h"
 #include "emacs.h"
+#include "recent.h"
 #include "gtkprint.h"
 #include <gdk/gdkkeysyms-compat.h>
 
