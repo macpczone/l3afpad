@@ -34,6 +34,10 @@ typedef struct {
 	gboolean linenumbers;
 	gboolean autoindent;
 	gint tabwidth;
+	gboolean autosave;
+	guint autosavetimer;
+	gboolean autosavesamedir;
+	guint autosaveimmediatechanges;
 } Conf;
 
 static void load_config_file(Conf *conf)
@@ -68,6 +72,14 @@ static void load_config_file(Conf *conf)
 			conf->autoindent = atoi(buf);
 			fgets(buf, sizeof(buf), fp);
 			conf->tabwidth = atoi(buf) > 0 ? atoi(buf) : get_current_tab_width();
+			fgets(buf, sizeof(buf), fp);
+			conf->autosave = atoi(buf);
+			fgets(buf, sizeof(buf), fp);
+			conf->autosavetimer = atoi(buf) > 0 ? atoi(buf) : 10000;
+			fgets(buf, sizeof(buf), fp);
+			conf->autosavesamedir = atoi(buf);
+			fgets(buf, sizeof(buf), fp);
+			conf->autosaveimmediatechanges = atoi(buf) > 0 ? atoi(buf) : 150;
 		}
 		g_strfreev(num);
 	}
@@ -79,8 +91,9 @@ void save_config_file(void)
 	FILE *fp;
 	gchar *path;
 	gint width, height, tabwidth;
+	guint autosavetimer, autosaveimmediatechanges;
 	gchar *fontname;
-	gboolean wordwrap, linenumbers, autoindent;
+	gboolean wordwrap, linenumbers, autoindent, autosave, autosavesamedir;
 
 	gtk_window_get_size(GTK_WINDOW(pub->mw->window), &width, &height);
 	fontname = pango_font_description_to_string(gtk_style_context_get_font(gtk_widget_get_style_context(pub->mw->view), 0));
@@ -94,6 +107,14 @@ void save_config_file(void)
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
 			"/M/Options/AutoIndent")));
 	tabwidth = get_current_tab_width();
+	autosave = gtk_toggle_action_get_active(
+		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
+			"/M/Options/AutoSave")));
+	autosavetimer = autosave_get_timer();
+	autosavesamedir = gtk_toggle_action_get_active(
+		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
+			"/M/Options/AutoSaveSameDir")));
+	autosaveimmediatechanges = autosave_get_immediate_changes();
 
 	path = g_build_filename(g_get_user_config_dir(), PACKAGE, NULL);
 	if (!g_file_test(path, G_FILE_TEST_IS_DIR))
@@ -116,6 +137,10 @@ void save_config_file(void)
 	fprintf(fp, "%d\n", linenumbers);
 	fprintf(fp, "%d\n", autoindent);
 	fprintf(fp, "%d\n", tabwidth);
+	fprintf(fp, "%d\n", autosave);
+	fprintf(fp, "%u\n", autosavetimer);
+	fprintf(fp, "%d\n", autosavesamedir);
+	fprintf(fp, "%u\n", autosaveimmediatechanges);
 	fclose(fp);
 
 	g_free(fontname);
@@ -228,6 +253,10 @@ gint main(gint argc, gchar **argv)
 	conf->linenumbers = FALSE;
 	conf->autoindent  = FALSE;
 	conf->tabwidth    = get_current_tab_width();
+	conf->autosave    = FALSE;
+	conf->autosavetimer = 10000;
+	conf->autosavesamedir = FALSE;
+	conf->autosaveimmediatechanges = 150;
 
 	load_config_file(conf);
 
@@ -246,6 +275,16 @@ gint main(gint argc, gchar **argv)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/AutoIndent")),
 		conf->autoindent);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
+		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/AutoSave")),
+		conf->autosave);
+	autosave_set_state(conf->autosave);
+	autosave_set_timer(conf->autosavetimer);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
+		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/AutoSaveSameDir")),
+		conf->autosavesamedir);
+	autosave_set_same_dir(conf->autosavesamedir);
+	autosave_set_immediate_changes(conf->autosaveimmediatechanges);
 
 	gtk_widget_show_all(pub->mw->window);
 	g_free(conf->fontname);

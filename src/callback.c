@@ -324,6 +324,24 @@ void on_option_auto_indent(void)
 	indent_set_state(state);
 }
 
+void on_option_auto_save(void)
+{
+	gboolean state;
+
+	state = gtk_toggle_action_get_active(
+		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/AutoSave")));
+	autosave_set_state(state);
+}
+
+void on_option_auto_save_same_dir(void)
+{
+	gboolean state;
+
+	state = gtk_toggle_action_get_active(
+		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/AutoSaveSameDir")));
+	autosave_set_same_dir(state);
+}
+
 void on_help_about(void)
 {
 	const gchar *copyright = "Copyright \xc2\xa9 2004-2010 Tarot Osuji\nCopyright \xc2\xa9 2011 Wen-Yen Chuang\nCopyright \xc2\xa9 2011 Jack Gandy\nCopyright \xc2\xa9 2012 Yoo, Taik-Yon\nCopyright \xc2\xa9 2014 Steven Honeyman";

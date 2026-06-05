@@ -48,6 +48,7 @@
 #define ENABLE_XINPUT2 1
 #endif
 
+#include "autosave.h"
 #include "window.h"
 #include "menu.h"
 #include "callback.h"

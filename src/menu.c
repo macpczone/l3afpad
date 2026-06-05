@@ -71,6 +71,8 @@ static GtkToggleActionEntry toggle_entries[] =
 	{ "WordWrap", NULL, N_("_Word Wrap"), NULL, NULL, G_CALLBACK (on_option_word_wrap), FALSE },
 	{ "LineNumbers", NULL, N_("_Line Numbers"), NULL, NULL, G_CALLBACK (on_option_line_numbers), FALSE },
 	{ "AutoIndent", NULL, N_("_Auto Indent"), NULL, NULL, G_CALLBACK (on_option_auto_indent), FALSE },
+	{ "AutoSave", NULL, N_("Auto Save"), NULL, NULL, G_CALLBACK (on_option_auto_save), FALSE },
+	{ "AutoSaveSameDir", NULL, N_("Auto Save Same Dir"), NULL, NULL, G_CALLBACK (on_option_auto_save_same_dir), FALSE },
 };
 static guint n_toggle_entries = G_N_ELEMENTS (toggle_entries);
 
@@ -118,6 +120,9 @@ static const gchar *ui_info =
 "      <menuitem action='LineNumbers'/>"
 "      <separator/>"
 "      <menuitem action='AutoIndent'/>"
+"      <separator/>"
+"      <menuitem action='AutoSave'/>"
+"      <menuitem action='AutoSaveSameDir'/>"
 "    </menu>"
 "    <menu action='Help'>"
 "      <menuitem action='About'/>"

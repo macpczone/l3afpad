@@ -36,6 +36,7 @@ void clear_current_keyval(void)
 {
 	keyval = 0;
 }
+
 /*
 gboolean scroll_to_cursor(GtkTextBuffer *buffer, gdouble within_margin)
 {
@@ -68,6 +69,7 @@ gint check_text_modification(void)
 		g_free(str);
 		switch (res) {
 		case GTK_RESPONSE_NO:
+			autosave_discard_temp_file();
 			return 0;
 		case GTK_RESPONSE_YES:
 			if (!on_file_save())
@@ -233,6 +235,11 @@ static gboolean cb_button_press_event(GtkWidget *view, GdkEventButton *event)
 	return FALSE;
 }
 
+static void cb_changed(GtkTextBuffer *buffer, GtkWidget *view)
+{
+	autosave_cb_buffer_changed(buffer, view);
+}
+
 static void cb_modified_changed(GtkTextBuffer *buffer, GtkWidget *view)
 {
 	gboolean modified_flag, exist_flag = FALSE;
@@ -369,6 +376,8 @@ GtkWidget *create_text_view(void)
 		G_CALLBACK(cb_mark_changed), NULL);
 	g_signal_connect(G_OBJECT(buffer), "mark-deleted",
 		G_CALLBACK(cb_mark_changed), NULL);
+	g_signal_connect(G_OBJECT(buffer), "changed",
+		G_CALLBACK(cb_changed), view);
 	g_signal_connect(G_OBJECT(buffer), "modified-changed",
 		G_CALLBACK(cb_modified_changed), view);
 	g_signal_connect_after(G_OBJECT(buffer), "end-user-action",
