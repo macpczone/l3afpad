@@ -114,7 +114,7 @@ line_numbers_foreground_attr_new(GtkWidget *widget)
 	GdkRGBA          rgb;
 
 	context = gtk_widget_get_style_context(widget);
-	gtk_style_context_get_color(context, GTK_STATE_FLAG_NORMAL, &rgb);
+	gtk_style_context_get_color(context, GTK_STATE_FLAG_INSENSITIVE, &rgb);
 
 	return pango_attr_foreground_new((guint16)(rgb.red   * 65535),
 									 (guint16)(rgb.green * 65535),
