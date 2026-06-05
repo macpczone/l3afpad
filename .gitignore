@@ -22,3 +22,4 @@ Makefile.in.in
 /src/l3afpad
 /stamp-h1
 
+.cecli*
