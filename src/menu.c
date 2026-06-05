@@ -73,6 +73,7 @@ static GtkToggleActionEntry toggle_entries[] =
 	{ "AutoIndent", NULL, N_("_Auto Indent"), NULL, NULL, G_CALLBACK (on_option_auto_indent), FALSE },
 	{ "AutoSave", NULL, N_("Auto Save"), NULL, NULL, G_CALLBACK (on_option_auto_save), FALSE },
 	{ "AutoSaveSameDir", NULL, N_("Auto Save Same Dir"), NULL, NULL, G_CALLBACK (on_option_auto_save_same_dir), FALSE },
+	{ "SaveOnFocus", NULL, N_("Auto _save on lost focus"), NULL, NULL, G_CALLBACK (on_option_focus_save), FALSE },
 };
 static guint n_toggle_entries = G_N_ELEMENTS (toggle_entries);
 
@@ -123,6 +124,7 @@ static const gchar *ui_info =
 "      <separator/>"
 "      <menuitem action='AutoSave'/>"
 "      <menuitem action='AutoSaveSameDir'/>"
+"      <menuitem action='SaveOnFocus'/>"
 "    </menu>"
 "    <menu action='Help'>"
 "      <menuitem action='About'/>"

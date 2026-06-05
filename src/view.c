@@ -303,6 +303,12 @@ static void cb_focus_event(GtkWidget *view, GdkEventFocus *event)
 				gtk_text_view_get_buffer(GTK_TEXT_VIEW(view))), !event->in);
 	if (event->in)
 		menu_sensitivity_from_clipboard();
+	else if ( pub->fi->filename 
+	       && gtk_toggle_action_get_active(GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/SaveOnFocus")))
+	       && g_file_test(g_filename_to_utf8(pub->fi->filename, -1, NULL, NULL, NULL),
+									      G_FILE_TEST_EXISTS) )
+		on_file_save();
+	
 }
 /*
 static void cb_begin_user_action(GtkTextBuffer *buffer, GtkWidget *view)

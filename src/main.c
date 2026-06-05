@@ -33,6 +33,7 @@ typedef struct {
 	gboolean wordwrap;
 	gboolean linenumbers;
 	gboolean autoindent;
+	gboolean focussave;
 	gint tabwidth;
 	gboolean autosave;
 	guint autosavetimer;
@@ -71,6 +72,8 @@ static void load_config_file(Conf *conf)
 			fgets(buf, sizeof(buf), fp);
 			conf->autoindent = atoi(buf);
 			fgets(buf, sizeof(buf), fp);
+			conf->focussave = atoi(buf);
+			fgets(buf, sizeof(buf), fp);
 			conf->tabwidth = atoi(buf) > 0 ? atoi(buf) : get_current_tab_width();
 			fgets(buf, sizeof(buf), fp);
 			conf->autosave = atoi(buf);
@@ -93,7 +96,7 @@ void save_config_file(void)
 	gint width, height, tabwidth;
 	guint autosavetimer, autosaveimmediatechanges;
 	gchar *fontname;
-	gboolean wordwrap, linenumbers, autoindent, autosave, autosavesamedir;
+	gboolean wordwrap, linenumbers, autoindent, autosave, autosavesamedir, focussave;
 
 	gtk_window_get_size(GTK_WINDOW(pub->mw->window), &width, &height);
 	fontname = pango_font_description_to_string(gtk_style_context_get_font(gtk_widget_get_style_context(pub->mw->view), 0));
@@ -106,6 +109,9 @@ void save_config_file(void)
 	autoindent = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
 			"/M/Options/AutoIndent")));
+	focussave = gtk_toggle_action_get_active(
+		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
+			"/M/Options/SaveOnFocus")));
 	tabwidth = get_current_tab_width();
 	autosave = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
@@ -136,6 +142,7 @@ void save_config_file(void)
 	fprintf(fp, "%d\n", wordwrap);
 	fprintf(fp, "%d\n", linenumbers);
 	fprintf(fp, "%d\n", autoindent);
+	fprintf(fp, "%d\n", focussave);
 	fprintf(fp, "%d\n", tabwidth);
 	fprintf(fp, "%d\n", autosave);
 	fprintf(fp, "%u\n", autosavetimer);
@@ -252,6 +259,7 @@ gint main(gint argc, gchar **argv)
 	conf->wordwrap    = FALSE;
 	conf->linenumbers = FALSE;
 	conf->autoindent  = FALSE;
+	conf->focussave   = FALSE;
 	conf->tabwidth    = get_current_tab_width();
 	conf->autosave    = FALSE;
 	conf->autosavetimer = 10000;
@@ -276,6 +284,7 @@ gint main(gint argc, gchar **argv)
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/AutoIndent")),
 		conf->autoindent);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
+<<<<<<< HEAD
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/AutoSave")),
 		conf->autosave);
 	autosave_set_state(conf->autosave);
@@ -285,6 +294,10 @@ gint main(gint argc, gchar **argv)
 		conf->autosavesamedir);
 	autosave_set_same_dir(conf->autosavesamedir);
 	autosave_set_immediate_changes(conf->autosaveimmediatechanges);
+=======
+		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/SaveOnFocus")),
+		conf->focussave);
+>>>>>>> bef396b813cf0a1cdc7306ee729b440175b50a6c
 
 	gtk_widget_show_all(pub->mw->window);
 	g_free(conf->fontname);
