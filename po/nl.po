@@ -154,8 +154,8 @@ msgstr "Eenvoudige tekstbewerker gebouwd op GTK+"
 msgid "translator-credits"
 msgstr ""
 "Wouter Van Hemel <wouter-oss@publica.duodecim.org>\n"
-"Benno Schulenberg <benno@vertaalt.nl>"
-"Pjotr <pjotrvertaalt@gmail.com>
+"Benno Schulenberg <benno@vertaalt.nl>\n"
+"Pjotr <pjotrvertaalt@gmail.com>"
 
 #: ../src/callback.c:349
 msgid "Lɜafpad"

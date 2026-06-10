@@ -23,3 +23,6 @@ Makefile.in.in
 /stamp-h1
 
 .cecli*
+/config.log
+*~
+*.o

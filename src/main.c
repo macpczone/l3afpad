@@ -284,7 +284,6 @@ gint main(gint argc, gchar **argv)
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/AutoIndent")),
 		conf->autoindent);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
-<<<<<<< HEAD
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/AutoSave")),
 		conf->autosave);
 	autosave_set_state(conf->autosave);
@@ -294,10 +293,9 @@ gint main(gint argc, gchar **argv)
 		conf->autosavesamedir);
 	autosave_set_same_dir(conf->autosavesamedir);
 	autosave_set_immediate_changes(conf->autosaveimmediatechanges);
-=======
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/SaveOnFocus")),
 		conf->focussave);
->>>>>>> bef396b813cf0a1cdc7306ee729b440175b50a6c
 
 	gtk_widget_show_all(pub->mw->window);
 	g_free(conf->fontname);

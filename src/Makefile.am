@@ -21,7 +21,7 @@ l3afpad_SOURCES = \
 	dnd.h dnd.c \
 	utils.h utils.c \
 	emacs.h emacs.c \
-	gtksourceiter.h gtksourceiter.c
+	gtksourceiter.h gtksourceiter.c \
         recent.h recent.c
 
 l3afpad_CFLAGS  = $(GTK_CFLAGS)
