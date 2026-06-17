@@ -182,6 +182,8 @@ GtkUIManager *create_menu_bar(GtkWidget *window)
 		gtk_ui_manager_get_widget(ifactory, "/M/Search/Replace"),
 		"activate", accel_group, GDK_R, GDK_CONTROL_MASK, 0);
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	gtk_widget_set_sensitive(
 		gtk_ui_manager_get_widget(ifactory, "/M/Search/FindNext"),
 		FALSE);
@@ -197,6 +199,7 @@ GtkUIManager *create_menu_bar(GtkWidget *window)
 	menu_sensitivity_from_selection_bound(FALSE);
 
 	GtkWidget *recent_item = gtk_ui_manager_get_widget(ifactory, "/M/File/RecentFiles");
+#pragma GCC diagnostic pop
 	if (recent_item) {
 		GtkWidget *recent_menu = gtk_menu_new();
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(recent_item), recent_menu);
