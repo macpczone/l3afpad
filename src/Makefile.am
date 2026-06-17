@@ -1,5 +1,11 @@
 bin_PROGRAMS = l3afpad
 
+AM_CPPFLAGS = -DICONDIR=\"$(datadir)/pixmaps\"
+
+if ENABLE_CHARDETECT
+AM_CPPFLAGS += -I/usr/include/uchardet
+endif
+
 l3afpad_SOURCES = \
 	l3afpad.h main.c \
 	autosave.h autosave.c \
@@ -26,3 +32,7 @@ l3afpad_SOURCES = \
 
 l3afpad_CFLAGS  = $(GTK_CFLAGS)
 l3afpad_LDADD   = $(GTK_LIBS) $(INTLLIBS)
+
+if ENABLE_CHARDETECT
+l3afpad_LDADD += -luchardet -lstdc++
+endif

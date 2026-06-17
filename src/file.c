@@ -21,6 +21,12 @@
 #include <stdio.h>
 #include <string.h>
 #include "l3afpad.h"
+#ifdef HAVE_CONFIG_H
+#	include "config.h"
+#endif
+#ifdef ENABLE_CHARDETECT
+#	include "uchardet.h"
+#endif
 
 gboolean check_file_writable(gchar *filename)
 {
@@ -126,7 +132,16 @@ gint file_open_real(GtkWidget *view, FileInfo *fi)
 	if (fi->charset)
 		charset = fi->charset;
 	else {
+#ifdef ENABLE_CHARDETECT
+		uchardet_t det = uchardet_new();
+		uchardet_reset(det);
+		uchardet_handle_data(det, contents, strlen(contents));
+		uchardet_data_end(det);
+		charset = g_strdup(uchardet_get_charset(det));
+		uchardet_delete(det);
+#else
 		charset = detect_charset(contents);
+#endif
 		if (charset == NULL)
 			charset = get_default_charset();
 	}

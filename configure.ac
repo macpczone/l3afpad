@@ -9,8 +9,17 @@ if test "$GCC" = "yes"; then
 	CFLAGS="$CFLAGS -Wall"
 fi
 AM_PROG_CC_C_O
+AC_PROG_CXX
+AC_PROG_RANLIB
 
 PKG_CHECK_MODULES(GTK, gtk+-3.0)
+
+AC_ARG_ENABLE(chardetect,
+	AC_HELP_STRING([--disable-chardetect], [force to disable universalchardet feature]))
+	if test "$enable_chardetect" != "no"; then
+		AC_DEFINE(ENABLE_CHARDETECT, 1, [Define if universalchardet is enabled.])
+		ENABLE_CHARDETECT=yes
+	fi
 
 AC_ARG_ENABLE(print,
 	AC_HELP_STRING([--disable-print], [force to disable print feature]))
@@ -41,6 +50,8 @@ AC_ARG_ENABLE(search-history,
 	if test "$enable_search_history" = "yes"; then
 		AC_DEFINE(SEARCH_HISTORY, 1, [Define to 1 if you enable search history.])
 	fi
+
+AM_CONDITIONAL(ENABLE_CHARDETECT, test "x$ENABLE_CHARDETECT" = "xyes")
 
 GETTEXT_PACKAGE="$PACKAGE"
 AC_SUBST(GETTEXT_PACKAGE)
