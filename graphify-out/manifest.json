@@ -1,0 +1,352 @@
+{
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/autogen.sh": {
+    "mtime": 1780675323.6195168,
+    "ast_hash": "d0050b5a20b5673cdc4521716163dcde",
+    "semantic_hash": "d0050b5a20b5673cdc4521716163dcde"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/autosave.c": {
+    "mtime": 1780676612.5764797,
+    "ast_hash": "b29bb182a6061286956892f3b0ee697c",
+    "semantic_hash": "b29bb182a6061286956892f3b0ee697c"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/autosave.h": {
+    "mtime": 1780676612.5764797,
+    "ast_hash": "8ee28a00b6c94c296f97ba7ca6d960f9",
+    "semantic_hash": "8ee28a00b6c94c296f97ba7ca6d960f9"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/callback.c": {
+    "mtime": 1780679488.020397,
+    "ast_hash": "5656b29fc69c2208aee0e3ddd67cc6ad",
+    "semantic_hash": "5656b29fc69c2208aee0e3ddd67cc6ad"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/callback.h": {
+    "mtime": 1780679558.412395,
+    "ast_hash": "3721a13ea14efbd2ea7f2586210b237b",
+    "semantic_hash": "3721a13ea14efbd2ea7f2586210b237b"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/dialog.c": {
+    "mtime": 1780675323.6425169,
+    "ast_hash": "298e20b189b786c835688d1323480444",
+    "semantic_hash": "298e20b189b786c835688d1323480444"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/dialog.h": {
+    "mtime": 1780675323.6425169,
+    "ast_hash": "fe17fca6e658be938dce6a9290a1e84e",
+    "semantic_hash": "fe17fca6e658be938dce6a9290a1e84e"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/dnd.c": {
+    "mtime": 1780679262.5194035,
+    "ast_hash": "0cd9ef1b75b078cf9f3c139cd0553e8f",
+    "semantic_hash": "0cd9ef1b75b078cf9f3c139cd0553e8f"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/dnd.h": {
+    "mtime": 1780675323.6425169,
+    "ast_hash": "bdcf76ea9ecdfb95f2e80ed607f99630",
+    "semantic_hash": "bdcf76ea9ecdfb95f2e80ed607f99630"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/emacs.c": {
+    "mtime": 1780675323.6425169,
+    "ast_hash": "c44dede886a510cbb41936e9a6a4c3b8",
+    "semantic_hash": "c44dede886a510cbb41936e9a6a4c3b8"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/emacs.h": {
+    "mtime": 1780675323.6425169,
+    "ast_hash": "d1fe22ca35d17470f4d987a6c30a3163",
+    "semantic_hash": "d1fe22ca35d17470f4d987a6c30a3163"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/encoding.c": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "e110fdb6a1a4cbfd5f6eed2820ee0d73",
+    "semantic_hash": "e110fdb6a1a4cbfd5f6eed2820ee0d73"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/encoding.h": {
+    "mtime": 1780679262.5204034,
+    "ast_hash": "a49c163748bfaf8234c45b47fc74a23f",
+    "semantic_hash": "a49c163748bfaf8234c45b47fc74a23f"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/file.c": {
+    "mtime": 1780676612.5774796,
+    "ast_hash": "a801e2a7883d419696b782e38eb15ad0",
+    "semantic_hash": "a801e2a7883d419696b782e38eb15ad0"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/file.h": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "6373af1b1c512d4f43a32ff166d069fb",
+    "semantic_hash": "6373af1b1c512d4f43a32ff166d069fb"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/font.c": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "e863c3f2be15c0623a547f37a71116fd",
+    "semantic_hash": "e863c3f2be15c0623a547f37a71116fd"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/font.h": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "0bdeeb012c5efae4aea46aca015524bd",
+    "semantic_hash": "0bdeeb012c5efae4aea46aca015524bd"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/gtkprint.c": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "1b5dc276c1ffa781728375a83f3fd94d",
+    "semantic_hash": "1b5dc276c1ffa781728375a83f3fd94d"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/gtkprint.h": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "25fa22e2574431cbfd534687a1b96ff1",
+    "semantic_hash": "25fa22e2574431cbfd534687a1b96ff1"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/gtksourceiter.c": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "985c31d4f3559be8a445b8fecb3b40ed",
+    "semantic_hash": "985c31d4f3559be8a445b8fecb3b40ed"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/gtksourceiter.h": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "60cb59b930cd99ceecd0fd67fb3d288b",
+    "semantic_hash": "60cb59b930cd99ceecd0fd67fb3d288b"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/hlight.c": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "2fa656c21b7ea59f2596ec2f7cfefd34",
+    "semantic_hash": "2fa656c21b7ea59f2596ec2f7cfefd34"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/hlight.h": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "a5146aa68b55fcc2b0251cc41e97a412",
+    "semantic_hash": "a5146aa68b55fcc2b0251cc41e97a412"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/indent.c": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "744626d8fa096150d9af28ce10c501af",
+    "semantic_hash": "744626d8fa096150d9af28ce10c501af"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/indent.h": {
+    "mtime": 1780675323.6435168,
+    "ast_hash": "a9b264fca5601f3d75fff272ed98fda7",
+    "semantic_hash": "a9b264fca5601f3d75fff272ed98fda7"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/l3afpad.h": {
+    "mtime": 1780679262.5204034,
+    "ast_hash": "56ce9652c20be896f37a45329c542d29",
+    "semantic_hash": "56ce9652c20be896f37a45329c542d29"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/linenum.c": {
+    "mtime": 1780676848.6144729,
+    "ast_hash": "a6c2468f881a992095cdfbed49a99185",
+    "semantic_hash": "a6c2468f881a992095cdfbed49a99185"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/linenum.h": {
+    "mtime": 1780675323.6445167,
+    "ast_hash": "6d3af1f0b1f9ba04fe499746826db679",
+    "semantic_hash": "6d3af1f0b1f9ba04fe499746826db679"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/main.c": {
+    "mtime": 1780870820.8658912,
+    "ast_hash": "1de83c3f84420005828cd14b31d6c2f3",
+    "semantic_hash": "1de83c3f84420005828cd14b31d6c2f3"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/menu.c": {
+    "mtime": 1780679262.5204034,
+    "ast_hash": "53920c9afc58ca71517ca58f84ddf1d8",
+    "semantic_hash": "53920c9afc58ca71517ca58f84ddf1d8"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/menu.h": {
+    "mtime": 1780675323.6445167,
+    "ast_hash": "86374681c84e1f36c99ef4ef15fd45a5",
+    "semantic_hash": "86374681c84e1f36c99ef4ef15fd45a5"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/recent.c": {
+    "mtime": 1780679262.5204034,
+    "ast_hash": "07c7ec98d8789efee44b865df58715d6",
+    "semantic_hash": "07c7ec98d8789efee44b865df58715d6"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/recent.h": {
+    "mtime": 1780679262.5204034,
+    "ast_hash": "becadbf3eaad99333c9b7fcd3815edb1",
+    "semantic_hash": "becadbf3eaad99333c9b7fcd3815edb1"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/search.c": {
+    "mtime": 1780679262.5204034,
+    "ast_hash": "d1b6d062dd96a87d7456ad2b6829bbd4",
+    "semantic_hash": "d1b6d062dd96a87d7456ad2b6829bbd4"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/search.h": {
+    "mtime": 1780675323.6445167,
+    "ast_hash": "edb1ce1ae9d8ae61b5f0305a9609e86f",
+    "semantic_hash": "edb1ce1ae9d8ae61b5f0305a9609e86f"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/selector.c": {
+    "mtime": 1780675323.6445167,
+    "ast_hash": "565230d47673971cef7514a9f8b9f98b",
+    "semantic_hash": "565230d47673971cef7514a9f8b9f98b"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/selector.h": {
+    "mtime": 1780675323.6445167,
+    "ast_hash": "16bd31b4829fa1fa8d6ca31da94330e4",
+    "semantic_hash": "16bd31b4829fa1fa8d6ca31da94330e4"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/undo.c": {
+    "mtime": 1780675323.6455169,
+    "ast_hash": "470a9a1dc309e20eecdb2a34fd87ed91",
+    "semantic_hash": "470a9a1dc309e20eecdb2a34fd87ed91"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/undo.h": {
+    "mtime": 1780675323.6455169,
+    "ast_hash": "01241dd98b02e6ee3ba870440ab30281",
+    "semantic_hash": "01241dd98b02e6ee3ba870440ab30281"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/utils.c": {
+    "mtime": 1780675323.6455169,
+    "ast_hash": "d5cbf9ff824a548b1d6fe30edd4f4ba4",
+    "semantic_hash": "d5cbf9ff824a548b1d6fe30edd4f4ba4"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/utils.h": {
+    "mtime": 1780675323.6455169,
+    "ast_hash": "5ec9af76928acf438c10cbf22fad71a1",
+    "semantic_hash": "5ec9af76928acf438c10cbf22fad71a1"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/view.c": {
+    "mtime": 1780676912.8194711,
+    "ast_hash": "cb0902b52954a0ecd7432a6fb233a305",
+    "semantic_hash": "cb0902b52954a0ecd7432a6fb233a305"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/view.h": {
+    "mtime": 1780675323.6455169,
+    "ast_hash": "11611d047de3bb5a118b6eac38ef8985",
+    "semantic_hash": "11611d047de3bb5a118b6eac38ef8985"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/window.c": {
+    "mtime": 1780679582.8173943,
+    "ast_hash": "106ec92542d8edee473ae67c61d47152",
+    "semantic_hash": "106ec92542d8edee473ae67c61d47152"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/src/window.h": {
+    "mtime": 1780675323.6455169,
+    "ast_hash": "46f37e9a66d1e5d132cd9725f227f672",
+    "semantic_hash": "46f37e9a66d1e5d132cd9725f227f672"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/AGENTS.md": {
+    "mtime": 1781643134.4142673,
+    "ast_hash": "a0ce029e9cd03ed7c167bb53d674e93d",
+    "semantic_hash": "a0ce029e9cd03ed7c167bb53d674e93d"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/128x128/l3afpad.png": {
+    "mtime": 1780675323.6195168,
+    "ast_hash": "7b6b9ce47edebebc215abe22095e0bf5",
+    "semantic_hash": "7b6b9ce47edebebc215abe22095e0bf5"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/16x16/l3afpad.png": {
+    "mtime": 1780675323.6205168,
+    "ast_hash": "46bf65dc38b38e6c03fc42e71a4970a1",
+    "semantic_hash": "46bf65dc38b38e6c03fc42e71a4970a1"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/192x192/l3afpad.png": {
+    "mtime": 1780675323.6205168,
+    "ast_hash": "30d1b99c03ac365cc67ffa9b1791864f",
+    "semantic_hash": "30d1b99c03ac365cc67ffa9b1791864f"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/20x20/l3afpad.png": {
+    "mtime": 1780675323.6225169,
+    "ast_hash": "3b28129648ea47d93a7e905b17e3cf0b",
+    "semantic_hash": "3b28129648ea47d93a7e905b17e3cf0b"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/22x22/l3afpad.png": {
+    "mtime": 1780675323.6225169,
+    "ast_hash": "b44259d2b4ccb24c3c40636dd38ff254",
+    "semantic_hash": "b44259d2b4ccb24c3c40636dd38ff254"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/24x24/l3afpad.png": {
+    "mtime": 1780675323.6245167,
+    "ast_hash": "fa0abc5930d8f62269d5ba7b360e96ef",
+    "semantic_hash": "fa0abc5930d8f62269d5ba7b360e96ef"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/256x256/l3afpad.png": {
+    "mtime": 1780675323.6275167,
+    "ast_hash": "2b2216fbc9a0ffc8034474991f70384a",
+    "semantic_hash": "2b2216fbc9a0ffc8034474991f70384a"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/32x32/l3afpad.png": {
+    "mtime": 1780675323.6285167,
+    "ast_hash": "d5a79b38ccd480971c413bae48565e6b",
+    "semantic_hash": "d5a79b38ccd480971c413bae48565e6b"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/36x36/l3afpad.png": {
+    "mtime": 1780675323.6295168,
+    "ast_hash": "3ab13bc8d0f68194bbe2bb9aba931d67",
+    "semantic_hash": "3ab13bc8d0f68194bbe2bb9aba931d67"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/40x40/l3afpad.png": {
+    "mtime": 1780675323.6305168,
+    "ast_hash": "8b74c6cfc67e3b3aeed0a1a292445be3",
+    "semantic_hash": "8b74c6cfc67e3b3aeed0a1a292445be3"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/48x48/l3afpad.png": {
+    "mtime": 1780675323.6305168,
+    "ast_hash": "d0beb0427b42a95ad4bab358911c1455",
+    "semantic_hash": "d0beb0427b42a95ad4bab358911c1455"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/64x64/l3afpad.png": {
+    "mtime": 1780675323.6305168,
+    "ast_hash": "3d5100c0d30d24ce45bd2af919187027",
+    "semantic_hash": "3d5100c0d30d24ce45bd2af919187027"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/72x72/l3afpad.png": {
+    "mtime": 1780675323.6305168,
+    "ast_hash": "6719cc5501353421b84b958b661101ec",
+    "semantic_hash": "6719cc5501353421b84b958b661101ec"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons/96x96/l3afpad.png": {
+    "mtime": 1780675323.6345167,
+    "ast_hash": "68ff61b2c140c13ead16523eee702a2d",
+    "semantic_hash": "68ff61b2c140c13ead16523eee702a2d"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/16.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "2541751e03f69762c8c7da446f910a21",
+    "semantic_hash": "2541751e03f69762c8c7da446f910a21"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/20.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "fc32ebde8b3bdac229877d8cbb8cea0d",
+    "semantic_hash": "fc32ebde8b3bdac229877d8cbb8cea0d"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/22.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "4f202365e7b4e8b5e8840f9f0df24cf1",
+    "semantic_hash": "4f202365e7b4e8b5e8840f9f0df24cf1"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/24.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "50642d6ae57cacd0f1664d6716477988",
+    "semantic_hash": "50642d6ae57cacd0f1664d6716477988"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/32.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "27ecc4d7d18acaab89d8b6001570879f",
+    "semantic_hash": "27ecc4d7d18acaab89d8b6001570879f"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/36.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "5c51e581ed93fe33c85dac0bc4093f14",
+    "semantic_hash": "5c51e581ed93fe33c85dac0bc4093f14"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/40.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "52bb856c0cac9573e8db2ebc33c50636",
+    "semantic_hash": "52bb856c0cac9573e8db2ebc33c50636"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/icons_another/48.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "5da05bbddfc234c0e136152df51a4736",
+    "semantic_hash": "5da05bbddfc234c0e136152df51a4736"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/l3afpad.png": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "d0beb0427b42a95ad4bab358911c1455",
+    "semantic_hash": "d0beb0427b42a95ad4bab358911c1455"
+  },
+  "/home/aiselfhosted/ai-stuff/projects/l3afpad/data/l3afpad_original.svg": {
+    "mtime": 1780675323.6355166,
+    "ast_hash": "e7b203324bea0708a85c8572fe6d4d5c",
+    "semantic_hash": "e7b203324bea0708a85c8572fe6d4d5c"
+  }
+}

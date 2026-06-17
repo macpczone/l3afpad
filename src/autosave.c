@@ -97,10 +97,13 @@ static void autosave_reset_num_changes(void)
 	autosave_data.changes = 0;
 }
 
-/** @see https://stackoverflow.com/questions/11871245/knuth-multiplicative-hash */
-static inline uint32_t hash(const uint32_t value)
+/**
+ * Generates a random 32-bit unsigned integer for use as an autosave file
+ * identifier. Relies on srand() being called elsewhere (e.g. in main()).
+ */
+static inline uint32_t autosave_generate_random_id(void)
 {
-	return value * UINT32_C(2654435761);
+	return (uint32_t) rand();
 }
 
 /**
@@ -109,20 +112,15 @@ static inline uint32_t hash(const uint32_t value)
 static gboolean autosave_generate_filename(GtkTextBuffer *buffer) {
 
 	gboolean uses_cache_dir = TRUE;
-	// Create a hash from our buffers pointer value,
-	// in order to circumvent the case of multiple opened files
-	// with the same name overwriting each others buffer.
-	//
-	// NOTE In case of a 64bit system, we discard the upper 32bits here,
-	//   but as the addresses are very likley to be different in the lower 32bits,
-	//   there should generally be no problem.
-	const uint32_t pointer_hash = hash((uint32_t) buffer);
+	// Generate a random identifier for the autosave filename
+	// to avoid collisions with other autosave files.
+	const uint32_t random_id = autosave_generate_random_id();
 	//autosave_data.filename[MAX_FILE_PATH_SIZE];
 	if (pub->fi->filename == NULL) {
 		// We are editing a text buffer without having chosen a filename yet
 		char *home;
 		home = getenv("HOME");
-		sprintf(autosave_data.filename, "%s/%s/%u.txt", home, AUTOSAVE_DIR_PATH, pointer_hash);
+		sprintf(autosave_data.filename, "%s/%s/%u.text", home, AUTOSAVE_DIR_PATH, random_id);
 	} else {
 		// Known/chosen filename
 		gchar real_filename_base_buf[MAX_FILE_PATH_SIZE];
@@ -132,12 +130,12 @@ static gboolean autosave_generate_filename(GtkTextBuffer *buffer) {
 			gchar real_filename_dir_buf[MAX_FILE_PATH_SIZE];
 			strcpy(real_filename_dir_buf, pub->fi->filename);
 			char* real_filename_dir = dirname(real_filename_dir_buf);
-			sprintf(autosave_data.filename, "%s/.%u_%s", real_filename_dir, pointer_hash, real_filename_base);
+			sprintf(autosave_data.filename, "%s/.%u_%s", real_filename_dir, random_id, real_filename_base);
 			uses_cache_dir = FALSE;
 		} else {
 			char *home;
 			home = getenv("HOME");
-			sprintf(autosave_data.filename, "%s/%s/.%u_%s", home, AUTOSAVE_DIR_PATH, pointer_hash, real_filename_base);
+			sprintf(autosave_data.filename, "%s/%s/.%u_%s", home, AUTOSAVE_DIR_PATH, random_id, real_filename_base);
 		}
 	}
 	return uses_cache_dir;

@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 PublicData *pub;
 
@@ -227,6 +228,8 @@ gint main(gint argc, gchar **argv)
 {
 	Conf *conf;
 	gchar *stdin_data = NULL;
+
+	srand((unsigned int) time(NULL));
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(PACKAGE, "UTF-8");
