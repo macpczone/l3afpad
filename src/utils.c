@@ -84,7 +84,6 @@ GtkWidget *create_button_with_stock_image(const gchar *text, const gchar *stock_
 	GtkWidget *hbox;
 	GtkWidget *image;
 	GtkWidget *label;
-	GtkWidget *align;
 
 	hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
 
@@ -94,11 +93,11 @@ GtkWidget *create_button_with_stock_image(const gchar *text, const gchar *stock_
 	label = gtk_label_new_with_mnemonic(text);
 	gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-	align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-	gtk_container_add(GTK_CONTAINER(align), hbox);
+	gtk_widget_set_halign(hbox, GTK_ALIGN_CENTER);
+	gtk_widget_set_valign(hbox, GTK_ALIGN_CENTER);
 
 	button = gtk_button_new();
-	gtk_container_add(GTK_CONTAINER(button), align);
+	gtk_container_add(GTK_CONTAINER(button), hbox);
 	gtk_widget_show_all(button);
 
 	return button;

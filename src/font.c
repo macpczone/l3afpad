@@ -49,7 +49,9 @@ void change_text_font_by_selector(GtkWidget *widget)
 {
 	gchar *current_fontname, *fontname;
 
-	current_fontname = pango_font_description_to_string(gtk_style_context_get_font(gtk_widget_get_style_context(widget), 0));
+	const PangoFontDescription *font_desc;
+	gtk_style_context_get(gtk_widget_get_style_context(widget), 0, GTK_STYLE_PROPERTY_FONT, &font_desc, NULL);
+	current_fontname = pango_font_description_to_string(font_desc);
 	fontname = get_font_name_by_selector(
 		gtk_widget_get_toplevel(widget), current_fontname);
 	if (fontname) {

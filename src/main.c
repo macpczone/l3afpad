@@ -100,7 +100,11 @@ void save_config_file(void)
 	gboolean wordwrap, linenumbers, autoindent, autosave, autosavesamedir, focussave;
 
 	gtk_window_get_size(GTK_WINDOW(pub->mw->window), &width, &height);
-	fontname = pango_font_description_to_string(gtk_style_context_get_font(gtk_widget_get_style_context(pub->mw->view), 0));
+	{
+		const PangoFontDescription *font_desc;
+		gtk_style_context_get(gtk_widget_get_style_context(pub->mw->view), 0, GTK_STYLE_PROPERTY_FONT, &font_desc, NULL);
+		fontname = pango_font_description_to_string(font_desc);
+	}
 	wordwrap = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
 			"/M/Options/WordWrap")));

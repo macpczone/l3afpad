@@ -288,7 +288,6 @@ static GtkWidget *create_charset_menu(FileInfo *selected_fi)
 static GtkWidget *create_file_selector(FileInfo *selected_fi)
 {
 	GtkWidget *selector;
-	GtkWidget *align;
 	GtkWidget *table;
 	GtkWidget *label;
 	GtkWidget *option_menu_charset;
@@ -304,10 +303,10 @@ static GtkWidget *create_file_selector(FileInfo *selected_fi)
 		NULL);
 	gtk_dialog_set_default_response(GTK_DIALOG(selector), GTK_RESPONSE_OK);
 
-	align = gtk_alignment_new(1, 0, 0, 0);
-	gtk_file_chooser_set_extra_widget(GTK_FILE_CHOOSER(selector), align);
 	table = gtk_grid_new();
-	gtk_container_add(GTK_CONTAINER(align), table);
+	gtk_widget_set_halign(table, GTK_ALIGN_FILL);
+	gtk_widget_set_valign(table, GTK_ALIGN_START);
+	gtk_file_chooser_set_extra_widget(GTK_FILE_CHOOSER(selector), table);
 	option_menu_charset = create_charset_menu(selected_fi);
 	label = gtk_label_new_with_mnemonic(_("C_haracter Coding:"));
 	gtk_label_set_mnemonic_widget(GTK_LABEL(label), option_menu_charset);
@@ -318,7 +317,7 @@ static GtkWidget *create_file_selector(FileInfo *selected_fi)
 		option_menu_lineend = create_lineend_menu(selected_fi);
 		gtk_grid_attach(GTK_GRID(table), option_menu_lineend, 2, 0, 1, 1);
 	}
-	gtk_widget_show_all(align);
+	gtk_widget_show_all(table);
 
 	if (selected_fi->filename)
 		gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(selector), selected_fi->filename);

@@ -55,7 +55,8 @@ static void cb_begin_print(GtkPrintOperation *op,
 
 	page_width = gtk_print_context_get_width(ctx);
 	page_height = gtk_print_context_get_height(ctx);
-	font_desc = gtk_style_context_get_font(gtk_widget_get_style_context(data), GTK_STATE_FLAG_NORMAL);
+	gtk_style_context_get(gtk_widget_get_style_context(data), GTK_STATE_FLAG_NORMAL,
+		GTK_STYLE_PROPERTY_FONT, &font_desc, NULL);
 	layout = gtk_print_context_create_pango_layout(ctx);
 	pango_layout_set_width(layout, page_width * PANGO_SCALE);
 	pango_layout_set_font_description(layout, font_desc);
@@ -167,7 +168,7 @@ static void create_error_dialog(GtkTextView *text_view, gchar *message)
 		"%s", message);
 	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
 	gtk_dialog_add_buttons(GTK_DIALOG(dialog),
-		GTK_STOCK_OK, GTK_RESPONSE_CANCEL, NULL);
+		"gtk-ok", GTK_RESPONSE_CANCEL, NULL);
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_CANCEL);
 	gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
