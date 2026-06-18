@@ -227,6 +227,7 @@ void on_edit_select_all(void)
 	set_selection_bound(pub->mw->buffer, 0, -1);
 }
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 static void activate_quick_find(void)
 {
 	static gboolean flag = FALSE;
@@ -319,6 +320,7 @@ void on_option_toggle_menubar(void)
 	menubar_widget = gtk_ui_manager_get_widget(pub->mw->menubar, "/M");
 	if (menubar_widget)
 		gtk_widget_set_visible(menubar_widget, !gtk_widget_get_visible(menubar_widget));
+G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
 void on_help_about(void)

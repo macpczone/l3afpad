@@ -180,8 +180,8 @@ static gint document_replace_real(GtkWidget *textview)
 				if (num == 0 && q_dialog == NULL)
 					q_dialog = create_dialog_message_question(
 						gtk_widget_get_toplevel(textview), _("Replace?"));
-					GtkTextIter ins,bou;
-					gtk_text_buffer_get_selection_bounds(textbuffer, &ins, &bou);
+				GtkTextIter ins, bou;
+				gtk_text_buffer_get_selection_bounds(textbuffer, &ins, &bou);
 				switch (gtk_dialog_run(GTK_DIALOG(q_dialog))) {
 				case GTK_RESPONSE_YES:
 					gtk_text_buffer_select_range(textbuffer, &ins, &bou);
@@ -292,6 +292,7 @@ static void toggle_check_all(GtkWidget *widget)
 
 gint run_dialog_search(GtkWidget *textview, gint mode)
 {
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	GtkWidget *dialog;
 	GtkWidget *table;
 	GtkWidget *label_find, *label_replace;
@@ -328,7 +329,8 @@ gint run_dialog_search(GtkWidget *textview, gint mode)
 	 gtk_container_set_border_width(GTK_CONTAINER(table), 8);
 	 gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), table, FALSE, FALSE, 0);
 	label_find = gtk_label_new_with_mnemonic(_("Fi_nd what:"));
-	 gtk_misc_set_alignment(GTK_MISC(label_find), 0, 0.5);
+	 gtk_label_set_xalign(GTK_LABEL(label_find), 0);
+	 gtk_label_set_yalign(GTK_LABEL(label_find), 0.5);
 	 gtk_table_attach_defaults(GTK_TABLE(table), label_find, 0, 1, 0, 1);
 #if SEARCH_HISTORY
 	combo_find = create_combo_with_history (&find_history);
@@ -374,7 +376,8 @@ gint run_dialog_search(GtkWidget *textview, gint mode)
 #endif
 	if (mode) {
 		label_replace = gtk_label_new_with_mnemonic(_("Re_place with:"));
-		 gtk_misc_set_alignment(GTK_MISC(label_replace), 0, 0.5);
+		 gtk_label_set_xalign(GTK_LABEL(label_replace), 0);
+		 gtk_label_set_yalign(GTK_LABEL(label_replace), 0.5);
 		 gtk_table_attach_defaults(GTK_TABLE(table), label_replace, 0, 1, 1, 2);
 #if SEARCH_HISTORY
 		combo_replace = create_combo_with_history (&replace_history);
@@ -448,10 +451,12 @@ gint run_dialog_search(GtkWidget *textview, gint mode)
 	}
 
 	return res;
+	G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
 void run_dialog_jump_to(GtkWidget *textview)
 {
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	GtkWidget *dialog;
 	GtkWidget *button;
 	GtkWidget *table;
@@ -504,4 +509,5 @@ void run_dialog_jump_to(GtkWidget *textview)
 	}
 
 	gtk_widget_destroy (dialog);
+	G_GNUC_END_IGNORE_DEPRECATIONS
 }

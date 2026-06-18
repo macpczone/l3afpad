@@ -163,7 +163,8 @@ static gboolean get_manual_charset(GtkComboBox *option_menu, FileInfo *selected_
 	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), vbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("Code_set:"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
+	gtk_label_set_xalign(GTK_LABEL(label), 0.0);
+	gtk_label_set_yalign(GTK_LABEL(label), 0.0);
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 5);
 
 	entry = gtk_entry_new();

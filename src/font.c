@@ -24,8 +24,10 @@ void set_text_font_by_name(GtkWidget *widget, gchar *fontname)
 	PangoFontDescription *font_desc;
 
 	font_desc = pango_font_description_from_string(fontname);
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	gtk_widget_override_font(widget, font_desc);
 	pango_font_description_free(font_desc);
+	G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
 static gchar *get_font_name_by_selector(GtkWidget *window, gchar *current_fontname)

@@ -105,6 +105,7 @@ void save_config_file(void)
 		gtk_style_context_get(gtk_widget_get_style_context(pub->mw->view), 0, GTK_STYLE_PROPERTY_FONT, &font_desc, NULL);
 		fontname = pango_font_description_to_string(font_desc);
 	}
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	wordwrap = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
 			"/M/Options/WordWrap")));
@@ -125,6 +126,7 @@ void save_config_file(void)
 	autosavesamedir = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar,
 			"/M/Options/AutoSaveSameDir")));
+	G_GNUC_END_IGNORE_DEPRECATIONS
 	autosaveimmediatechanges = autosave_get_immediate_changes();
 
 	path = g_build_filename(g_get_user_config_dir(), PACKAGE, NULL);
@@ -279,6 +281,7 @@ gint main(gint argc, gchar **argv)
 		GTK_WINDOW(pub->mw->window), conf->width, conf->height);
 	set_text_font_by_name(pub->mw->view, conf->fontname);
 
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Options/WordWrap")),
 		conf->wordwrap);
@@ -317,6 +320,7 @@ gint main(gint argc, gchar **argv)
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Edit/Undo"),
 		gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Edit/Redo"));
 //	hlight_init(pub->mw->buffer);
+	G_GNUC_END_IGNORE_DEPRECATIONS
 	dnd_init(pub->mw->view);
 
 	if (pub->fi->filename)

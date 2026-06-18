@@ -301,6 +301,7 @@ static void cb_focus_event(GtkWidget *view, GdkEventFocus *event)
 		gtk_text_mark_set_visible(
 			gtk_text_buffer_get_selection_bound(
 				gtk_text_view_get_buffer(GTK_TEXT_VIEW(view))), !event->in);
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	if (event->in)
 		menu_sensitivity_from_clipboard();
 	else if ( pub->fi->filename 
@@ -308,6 +309,7 @@ static void cb_focus_event(GtkWidget *view, GdkEventFocus *event)
 	       && g_file_test(g_filename_to_utf8(pub->fi->filename, -1, NULL, NULL, NULL),
 									      G_FILE_TEST_EXISTS) )
 		on_file_save();
+	G_GNUC_END_IGNORE_DEPRECATIONS
 	
 }
 /*

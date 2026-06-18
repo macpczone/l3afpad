@@ -149,6 +149,7 @@ GtkUIManager *create_menu_bar(GtkWidget *window)
 {
 	GtkUIManager *ifactory;
 
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	ifactory = gtk_ui_manager_new();
 	GtkActionGroup *actions = gtk_action_group_new("Actions");
 	gtk_action_group_set_translate_func(actions, menu_translate, NULL, NULL);
@@ -197,6 +198,7 @@ GtkUIManager *create_menu_bar(GtkWidget *window)
 	menu_sensitivity_from_selection_bound(FALSE);
 
 	GtkWidget *recent_item = gtk_ui_manager_get_widget(ifactory, "/M/File/RecentFiles");
+	G_GNUC_END_IGNORE_DEPRECATIONS
 	if (recent_item) {
 		GtkWidget *recent_menu = gtk_menu_new();
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(recent_item), recent_menu);

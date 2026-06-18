@@ -46,7 +46,9 @@ MainWin *create_main_window(void)
 	gtk_container_add(GTK_CONTAINER(mw->window), vbox);
 
 	mw->menubar = create_menu_bar(mw->window);
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	gtk_box_pack_start(GTK_BOX(vbox), gtk_ui_manager_get_widget(mw->menubar, "/M"), FALSE, FALSE, 0);
+	G_GNUC_END_IGNORE_DEPRECATIONS
 
 	sw = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_set_hexpand (sw, TRUE);
