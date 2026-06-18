@@ -22,12 +22,18 @@
 #include <libgen.h>
 #include <stdlib.h>
 
+#if ENABLE_DEBUG
+#define AUTOSAVE_DEBUG(fmt, ...) g_print("[autosave] " fmt "\n", ##__VA_ARGS__)
+#else
+#define AUTOSAVE_DEBUG(fmt, ...) ((void)0)
+#endif
+
 #define MAX_FILE_PATH_SIZE 256
 
 static gboolean autosave = FALSE;
 static guint autosave_timer = 10000;
 static gboolean autosave_same_dir = TRUE;
-static guint autosave_immediate_changes = 150;
+static guint autosave_immediate_changes = 100;
 /**
  * The path (relative to "$HOME") to the directory
  * where autosave files are stored.
@@ -153,43 +159,17 @@ static void autosave_delete_file(gchar *filename)
 	}
 }
 
-/**
- * Ensure the parent directory of the autosave file exists.
- */
-static void autosave_ensure_parent_exists() {
-
-	gchar parent_buf[MAX_FILE_PATH_SIZE];
-	strcpy(parent_buf, autosave_data.filename);
-	const gchar* parent = dirname(parent_buf);
-	const gint res = g_mkdir_with_parents(parent, 0700);
-	if (res != 0) {
-		perror("Error: Failed to create auto-save dir");
-	}
-}
-
 static void autosave_try_save(GtkWidget *view) {
 
 	GtkTextBuffer *buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
 	if (gtk_text_buffer_get_modified(buffer)) {
-		// store old/current auto-save filename
-		gchar old_filename[MAX_FILE_PATH_SIZE];
-		strcpy(old_filename, autosave_data.filename);
-
-		const gboolean uses_cache_dir = autosave_generate_filename(buffer);
-		if (uses_cache_dir) {
-			autosave_ensure_parent_exists();
-		}
-
+		AUTOSAVE_DEBUG("autosave_try_save: writing to %s", autosave_data.filename);
 		// perform the auto-save
 		FileInfo autosave_file_info = { autosave_data.filename, pub->fi->charset, pub->fi->charset_flag, pub->fi->lineend };
 		/*const gint save_err = */file_save_real(view, &autosave_file_info);
 		gtk_text_buffer_set_modified(buffer, TRUE);
 		autosave_reset_num_changes();
-		//g_print("l3afpad: auto-saved to file: '%s'\n", autosave_data.filename);
-
-		if (strcmp(old_filename, autosave_data.filename) != 0) {
-			autosave_delete_file(old_filename);
-		}
+		AUTOSAVE_DEBUG("autosave complete, changes reset");
 	}
 }
 
@@ -215,15 +195,29 @@ static gboolean time_handler(GtkWidget *view) {
 void autosave_cb_buffer_changed(GtkTextBuffer *buffer, GtkWidget *view)
 {
 	autosave_data.changes++;
+	AUTOSAVE_DEBUG("buffer changed: changes=%u", autosave_data.changes);
 	if (autosave) {
+		/* Generate the autosave filename once, on the first change. */
+		if (autosave_data.filename[0] == '\0') {
+			autosave_generate_filename(buffer);
+			AUTOSAVE_DEBUG("generated autosave filename: %s", autosave_data.filename);
+			if (autosave_data.filename[0] != '\0') {
+				gchar parent_buf[MAX_FILE_PATH_SIZE];
+				strcpy(parent_buf, autosave_data.filename);
+				const gchar* parent = dirname(parent_buf);
+				g_mkdir_with_parents(parent, 0700);
+			}
+		}
 		if (autosave_data.timer_id > 0) {
 			g_source_remove(autosave_data.timer_id);
 			autosave_data.timer_id = 0;
 		}
 		if (autosave_data.changes >= autosave_immediate_changes) {
+			AUTOSAVE_DEBUG("immediate autosave threshold reached");
 			autosave_try_save(view);
 		} else {
 			autosave_data.timer_id = g_timeout_add(autosave_timer, (GSourceFunc) time_handler, view);
+			AUTOSAVE_DEBUG("autosave timer set (%u ms)", autosave_timer);
 		}
 	}
 }
@@ -238,8 +232,10 @@ static void autosave_kill_timer()
 
 void autosave_cb_file_saved(gchar *filename)
 {
+	AUTOSAVE_DEBUG("file_saved: %s (autosave: %s)", filename, autosave_data.filename);
 	autosave_kill_timer();
 	if (strcmp(filename, autosave_data.filename) != 0) {
+		AUTOSAVE_DEBUG("not autosave file, discarding temp");
 		// not saving to our temporary/auto-save file
 		autosave_discard_temp_file();
 	}
@@ -247,6 +243,7 @@ void autosave_cb_file_saved(gchar *filename)
 
 void autosave_discard_temp_file()
 {
+	AUTOSAVE_DEBUG("discarding temp file: %s", autosave_data.filename);
 	autosave_kill_timer();
 	autosave_delete_file(autosave_data.filename);
 	AutoSaveData_init(&autosave_data);

@@ -51,6 +51,12 @@ AC_ARG_ENABLE(search-history,
 		AC_DEFINE(SEARCH_HISTORY, 1, [Define to 1 if you enable search history.])
 	fi
 
+AC_ARG_ENABLE(debug,
+	AC_HELP_STRING([--enable-debug], [enable debug output]))
+	if test "$enable_debug" = "yes"; then
+		AC_DEFINE(ENABLE_DEBUG, 1, [Define to 1 if you enable debug output.])
+	fi
+
 AM_CONDITIONAL(ENABLE_CHARDETECT, test "x$ENABLE_CHARDETECT" = "xyes")
 
 GETTEXT_PACKAGE="$PACKAGE"
