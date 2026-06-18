@@ -19,7 +19,7 @@
 
 #include "l3afpad.h"
 #ifdef HAVE_CONFIG_H
-#	include "config.h"
+#include "config.h"
 #endif
 #include <stdio.h>
 #include <stdlib.h>
@@ -231,11 +231,8 @@ static void activate_quick_find(void)
 {
 	static gboolean flag = FALSE;
 	if (!flag) {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 		gtk_widget_set_sensitive(gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Search/FindNext"), TRUE);
 		gtk_widget_set_sensitive(gtk_ui_manager_get_widget(pub->mw->menubar, "/M/Search/FindPrevious"), TRUE);
-#pragma GCC diagnostic pop
 		flag = TRUE;
 	}
 }
@@ -261,22 +258,16 @@ void on_option_font(void) { change_text_font_by_selector(pub->mw->view); }
 void on_option_word_wrap(void)
 {
 	gboolean state;
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	state = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/WordWrap")));
-#pragma GCC diagnostic pop
 	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(pub->mw->view), state ? GTK_WRAP_WORD_CHAR : GTK_WRAP_NONE);
 }
 
 void on_option_line_numbers(void)
 {
 	gboolean state;
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	state = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/LineNumbers")));
-#pragma GCC diagnostic pop
 	show_line_numbers(pub->mw->view, state);
 }
 
@@ -290,11 +281,8 @@ void on_option_always_on_top(void)
 void on_option_auto_indent(void)
 {
 	gboolean state;
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	state = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/AutoIndent")));
-#pragma GCC diagnostic pop
 	indent_set_state(state);
 }
 
@@ -302,11 +290,8 @@ void on_option_auto_save(void)
 {
 	gboolean state;
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	state = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/AutoSave")));
-#pragma GCC diagnostic pop
 	autosave_set_state(state);
 }
 
@@ -314,11 +299,8 @@ void on_option_auto_save_same_dir(void)
 {
 	gboolean state;
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	state = gtk_toggle_action_get_active(
 		GTK_TOGGLE_ACTION(gtk_ui_manager_get_action(pub->mw->menubar, "/M/Options/AutoSaveSameDir")));
-#pragma GCC diagnostic pop
 	autosave_set_same_dir(state);
 }
 
@@ -334,10 +316,7 @@ void on_option_focus_save(void)
 void on_option_toggle_menubar(void)
 {
 	GtkWidget *menubar_widget;
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	menubar_widget = gtk_ui_manager_get_widget(pub->mw->menubar, "/M");
-#pragma GCC diagnostic pop
 	if (menubar_widget)
 		gtk_widget_set_visible(menubar_widget, !gtk_widget_get_visible(menubar_widget));
 }
