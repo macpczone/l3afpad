@@ -49,6 +49,8 @@ static GtkActionEntry menu_items[] =
 	{ "Replace", "edit-find-replace", N_("_Replace..."), "<control>H", NULL, G_CALLBACK(on_search_replace) },
 	{ "JumpTo", "go-jump", N_("_Jump To..."), "<control>J", NULL, G_CALLBACK(on_search_jump_to) },
 	{ "Font", "font-select", N_("_Font..."), NULL, NULL, G_CALLBACK(on_option_font) },
+	{ "AutoSaveChars", NULL, N_("Auto Save Chars..."), NULL, NULL, G_CALLBACK(on_option_auto_save_chars) },
+	{ "AutoSaveSeconds", NULL, N_("Auto Save Seconds..."), NULL, NULL, G_CALLBACK(on_option_auto_save_seconds) },
 	{ "About", "help-about", N_("_About"), NULL, NULL, G_CALLBACK(on_help_about) },
 };
 
@@ -113,6 +115,8 @@ static const gchar *ui_info =
 "      <separator/>"
 "      <menuitem action='AutoSave'/>"
 "      <menuitem action='AutoSaveSameDir'/>"
+"      <menuitem action='AutoSaveChars'/>"
+"      <menuitem action='AutoSaveSeconds'/>"
 "      <menuitem action='SaveOnFocus'/>"
 "    </menu>"
 "    <menu action='Help'>"

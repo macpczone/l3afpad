@@ -48,6 +48,8 @@ void on_option_always_on_top(void);
 void on_option_auto_indent(void);
 void on_option_auto_save(void);
 void on_option_auto_save_same_dir(void);
+void on_option_auto_save_chars(void);
+void on_option_auto_save_seconds(void);
 void on_option_focus_save(void);
 void on_option_toggle_menubar(void);
 void on_file_open_recent(gpointer data);

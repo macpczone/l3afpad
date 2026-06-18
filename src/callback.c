@@ -305,6 +305,100 @@ void on_option_auto_save_same_dir(void)
 	autosave_set_same_dir(state);
 }
 
+void on_option_auto_save_chars(void)
+{
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+	GtkWidget *dialog;
+	GtkWidget *button;
+	GtkWidget *table;
+	GtkWidget *label;
+	GtkWidget *spinner;
+	GtkAdjustment *spinner_adj;
+	guint current;
+
+	current = autosave_get_immediate_changes();
+
+	dialog = gtk_dialog_new_with_buttons(_("Auto Save Chars"),
+		GTK_WINDOW(pub->mw->window),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		"gtk-cancel", GTK_RESPONSE_CANCEL,
+		NULL);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
+	button = gtk_button_new_with_label(_("_OK"));
+	gtk_widget_set_can_default(button, TRUE);
+	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
+	table = gtk_table_new(1, 2, FALSE);
+	 gtk_table_set_col_spacings(GTK_TABLE(table), 8);
+	 gtk_container_set_border_width(GTK_CONTAINER(table), 8);
+	 gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), table, FALSE, FALSE, 0);
+	label = gtk_label_new_with_mnemonic(_("Changes to _trigger auto-save:"));
+	spinner_adj = gtk_adjustment_new(current, 1, 10000, 1, 1, 0);
+	spinner = gtk_spin_button_new(spinner_adj, 1, 0);
+	 gtk_entry_set_width_chars(GTK_ENTRY(spinner), 8);
+	 gtk_label_set_mnemonic_widget(GTK_LABEL(label), spinner);
+	 gtk_entry_set_activates_default(GTK_ENTRY(spinner), TRUE);
+	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), spinner, 1, 2, 0, 1);
+
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
+	gtk_widget_show_all(dialog);
+
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
+		guint value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinner));
+		autosave_set_immediate_changes(value);
+	}
+	gtk_widget_destroy(dialog);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+void on_option_auto_save_seconds(void)
+{
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+	GtkWidget *dialog;
+	GtkWidget *button;
+	GtkWidget *table;
+	GtkWidget *label;
+	GtkWidget *spinner;
+	GtkAdjustment *spinner_adj;
+	guint current;
+
+	current = autosave_get_timer() / 1000;
+
+	dialog = gtk_dialog_new_with_buttons(_("Auto Save Seconds"),
+		GTK_WINDOW(pub->mw->window),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		"gtk-cancel", GTK_RESPONSE_CANCEL,
+		NULL);
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
+	button = gtk_button_new_with_label(_("_OK"));
+	gtk_widget_set_can_default(button, TRUE);
+	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
+	table = gtk_table_new(1, 2, FALSE);
+	 gtk_table_set_col_spacings(GTK_TABLE(table), 8);
+	 gtk_container_set_border_width(GTK_CONTAINER(table), 8);
+	 gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), table, FALSE, FALSE, 0);
+	label = gtk_label_new_with_mnemonic(_("Seconds before _auto-save:"));
+	spinner_adj = gtk_adjustment_new(current, 1, 300, 1, 1, 0);
+	spinner = gtk_spin_button_new(spinner_adj, 1, 0);
+	 gtk_entry_set_width_chars(GTK_ENTRY(spinner), 8);
+	 gtk_label_set_mnemonic_widget(GTK_LABEL(label), spinner);
+	 gtk_entry_set_activates_default(GTK_ENTRY(spinner), TRUE);
+	gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), spinner, 1, 2, 0, 1);
+
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
+	gtk_widget_show_all(dialog);
+
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
+		guint value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinner));
+		autosave_set_timer(value * 1000);
+	}
+	gtk_widget_destroy(dialog);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
 void on_option_focus_save(void)
 {
 	// gboolean state;
