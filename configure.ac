@@ -1,4 +1,4 @@
-AC_INIT(L3afpad, 0.20.25, nubesu@tuta.io)
+AC_INIT(L3afpad, 1.0.2, mikeai@bnm.one)
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE([enable])

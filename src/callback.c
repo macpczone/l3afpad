@@ -426,6 +426,7 @@ void on_help_about(void)
 		"Yoo, Taik-Yon <jaagar@gmail.com>",
 		"Steven Honeyman <stevenhoneyman@gmail.com>",
 		"Nube <nubesu@tuta.io>",
+		"Michael Campbell <mikeai@bnm.one>",
 		NULL
 	};
 	const gchar *artists[] = {
