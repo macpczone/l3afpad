@@ -10,8 +10,8 @@ L3afpad is a lightweight GTK3 text editor, a fork of [leafpad](http://tarot.free
 | Toolkit      | GTK+ 3.x                                  |
 | Build system | GNU Autotools (autoconf, automake, intltool) |
 | License      | GPL-2.0                                   |
-| Version      | 0.20.25                                   |
-| Maintainer   | nubesu@tuta.io                             |
+| Version      | 1.0.2                                     |
+| Maintainer   | Nube <nubesu@tuta.io> (configure.ac: mikeai@bnm.one) |
 
 L3afpad is designed for **simplicity and minimal weight**: few dependencies, fast startup, essential features only.
 
@@ -40,6 +40,9 @@ make install-strip    # Install (requires root)
 | `--disable-xinput2`         | enabled | Disable XInput2 (multi-device) support           |
 | `--enable-emacs`            | disabled| Enable experimental Emacs key theme              |
 | `--enable-search-history`   | disabled| Enable search/replace history                    |
+| `--enable-debug`            | disabled| Enable debug output                              |
+
+Note: `--disable-chardetect` is also available (chardetect is enabled by default). These map to preprocessor defines in `config.h`: `ENABLE_PRINT`, `ENABLE_STATISTICS`, `ENABLE_XINPUT2`, `ENABLE_EMACS`, `SEARCH_HISTORY`, `ENABLE_DEBUG`, `ENABLE_CHARDETECT`.
 
 These map to preprocessor defines in `config.h`: `ENABLE_PRINT`, `ENABLE_STATISTICS`, `ENABLE_XINPUT2`, `ENABLE_EMACS`, `SEARCH_HISTORY`.
 
@@ -89,6 +92,7 @@ l3afpad/
 │   ├── l3afpad.xpm           # XPM icon (fallback)
 │   ├── l3afpad_original.svg  # SVG source icon
 │   └── icons/                # PNG icons in 16x16 … 256x256 sizes
+│   └── icons_another/        # Alternative icon set (16 … 48)
 ├── po/                       # i18n translations (gettext)
 │   ├── LINGUAS               # List of supported locales
 │   ├── POTFILES.in           # Source files scanned for translatable strings
@@ -160,7 +164,7 @@ This struct is a global (`pub`) accessible from all source files.
 ## i18n (Internationalization)
 
 - Translations live in `po/`.
-- Supported languages: ar, bg, br, ca, cs, da, de, de_CH, el, eo, es, et, eu, fi, fr, ga, gl, he, hu, id, it, ja, ko, lt, lv, nl, nn, pl, pt, pt_BR, ru, sk, sl, sr, sv, ta, tr, uk, vi, zh_CN, zh_TW.
+- Supported languages: ar, bg, br, ca, cs, da, de, el, eo, es, et, eu, fi, fr, ga, gl, he, hu, id, it, ja, ko, lt, lv, nl, nn, pl, pt, pt_BR, ru, sk, sl, sr, sv, ta, tr, uk, vi, zh_CN, zh_TW.
 - To add a new translation:
   1. Add the locale code to `po/LINGUAS`
   2. Create `po/<locale>.po` from the POT template
@@ -186,7 +190,7 @@ src/l3afpad --codeset=UTF-8 --tab-width=4 --jump=42 myfile.txt
 
 ### Adding a new menu item
 
-1. Add the XML entry in `menu.c`'s `menu_xml` string.
+1. Add the XML entry in `menu.c`'s `ui_info` string.
 2. Add a callback function in `callback.c` and connect it in `window.c` or `menu.c`.
 3. If it's a toggle action, use `gtk_toggle_action_get_active()` to read state.
 

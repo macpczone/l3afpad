@@ -58,7 +58,7 @@ static void load_config_file(Conf *conf)
 
 	if (fgets(buf, sizeof(buf), fp)) {
 		num = g_strsplit(buf, "." , 3);
-		if ((atoi(num[1]) >= 8) && (atoi(num[2]) >= 0)) {
+		if ((atoi(num[0]) >= 1) || ((atoi(num[0]) == 0) && (atoi(num[1]) >= 8) && (atoi(num[2]) >= 0))) {
 			fgets(buf, sizeof(buf), fp);
 			conf->width = atoi(buf);
 			fgets(buf, sizeof(buf), fp);
