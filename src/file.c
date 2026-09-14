@@ -211,20 +211,54 @@ gint file_save_real(GtkWidget *view, FileInfo *fi)
 	if (!fi->charset)
 		fi->charset = g_strdup(get_default_charset());
 	cstr = g_convert(str, -1, fi->charset, "UTF-8", &rbytes, &wbytes, &err);
-	g_free(str);
 	if (err) {
 		switch (err->code) {
 		case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
-			run_dialog_message(gtk_widget_get_toplevel(view),
-				GTK_MESSAGE_ERROR, _("Can't convert codeset to '%s'"), fi->charset);
+			/*
+			 * The buffer contains characters not representable in the
+			 * original charset (e.g. £ typed into an ASCII file).
+			 * Fall back to a wider charset so the save succeeds.
+			 */
+			g_error_free(err);
+			err = NULL;
+
+			/* Try ISO-8859-1 — covers all Latin-1 chars including £ (0xA3) */
+			cstr = g_convert(str, -1, "ISO-8859-1", "UTF-8",
+				&rbytes, &wbytes, &err);
+			if (!err) {
+				g_free(fi->charset);
+				fi->charset = g_strdup("ISO-8859-1");
+			} else {
+				/* Try UTF-8 as final fallback */
+				g_error_free(err);
+				err = NULL;
+
+				cstr = g_convert(str, -1, "UTF-8", "UTF-8",
+					&rbytes, &wbytes, &err);
+				if (!err) {
+					g_free(fi->charset);
+					fi->charset = g_strdup("UTF-8");
+				}
+			}
+
+			/* If all fallbacks failed, show the original error */
+			if (err) {
+				run_dialog_message(gtk_widget_get_toplevel(view),
+					GTK_MESSAGE_ERROR, _("Can't convert codeset to '%s'"), fi->charset);
+				g_error_free(err);
+				g_free(str);
+				return -1;
+			}
 			break;
 		default:
 			run_dialog_message(gtk_widget_get_toplevel(view),
 				GTK_MESSAGE_ERROR, err->message);
+			g_error_free(err);
+			g_free(str);
+			return -1;
 		}
-		g_error_free(err);
-		return -1;
 	}
+	g_free(str);
 
 	fp = fopen(fi->filename, "w");
 	if (!fp) {
